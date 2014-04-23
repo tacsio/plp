@@ -1,0 +1,11 @@
+#Tue Apr 22 20:17:42 GMT-03:00 2014
+CLEAR_CONSOLE=true
+JAVACC_OPTIONS=
+JJDOC_OPTIONS=
+JJTREE_OPTIONS=
+JJ_NATURE=true
+JTB_OPTIONS=
+RUNTIME_JAR=C\:\\Users\\Tarcisio\\Projects\\plpcin\\javacc-4.0\\bin\\lib\\javacc.jar
+RUNTIME_JTBJAR=file\:/C\:/Users/Tarcisio/Projects/plpcin/eclipse_plp/plugins/sf.eclipse.javacc_1.5.16.jar\!/jtb132.jar
+SUPPRESS_WARNINGS=false
+eclipse.preferences.version=1

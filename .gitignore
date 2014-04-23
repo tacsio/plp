@@ -1,0 +1,8 @@
+*.ppt
+*Documenta*
+*CVS
+*configura*
+*bin
+*bin-test
+applet
+*.db

@@ -1,0 +1,72 @@
+   {
+      classe Contador0 {
+          int valor = 1;
+        proc print() {
+            write(this.valor)
+          },
+
+          proc incrementa() {
+            this.print();
+            this.valor := this.valor + 1
+
+          }
+      },
+
+      classe Contador {
+          Contador0 c2 := new Contador0,
+          int valor = 1;
+        proc print() {
+            write(this.valor)
+          },
+
+          proc incrementa() {
+            this.print();
+            this.valor := this.valor + 1
+
+          }
+
+
+      },
+      classe Contador2 {
+          Contador c3 :=new Contador,
+          int valor = 1;
+
+          proc incrementa() {
+            this.valor := this.valor + 1
+          },
+
+          proc print() {
+            write(((this).c3).valor);
+            (this.c3).c2.incrementa();
+            write("VAI IMPRIMIR THIS.C3.C2 QUE EH 2");
+            write(((this.c3).c2).valor)
+          }
+
+
+      }
+
+     ;
+
+     {
+       Contador c := new Contador,
+	int d = 8, int x = 3,
+
+       Contador2 c2 := new Contador2;
+	write("Will read d");
+    read(d);
+	c.valor :=4;
+    write("D eh "++ d);
+	write("Will read x");
+    read(x);
+	write("X eh "++ x);
+	//c.incrementa();
+    //c2.incrementa();
+    //c2.incrementa();
+    write("VAI IMPRIMIR C2.C");
+    (c2).c3.print();
+    write("vai imprimir C:"++c.valor);
+    c.print();
+    c2.print()
+     }
+
+   }
