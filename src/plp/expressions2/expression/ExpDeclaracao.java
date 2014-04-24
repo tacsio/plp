@@ -1,9 +1,7 @@
 package plp.expressions2.expression;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import plp.expressions1.util.Tipo;
 import plp.expressions2.declaration.DecVariavel;
@@ -26,32 +24,27 @@ public class ExpDeclaracao implements Expressao {
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 
 		ambiente.incrementa();
-		Map<Id, Valor> resolvedValues = resolveValueBindings(ambiente);
-		includeValueBindings(ambiente, resolvedValues);
+		resolveValueBindings(ambiente);
 		Valor result = expressao.avaliar(ambiente);
 		ambiente.restaura();
 
 		return result;
 	}
 
-	private void includeValueBindings(AmbienteExecucao ambiente,
-			Map<Id, Valor> resolvedValues) throws VariavelJaDeclaradaException {
-		for (Id id : resolvedValues.keySet()) {
-			Valor valor = resolvedValues.get(id);
-			ambiente.map(id, valor);
-		}
+	private void includeValueBinding(AmbienteExecucao ambiente,DecVariavel declaration) 
+		throws VariavelJaDeclaradaException {
+	
+		Id id = declaration.getId();
+		Valor valor = declaration.getExpressao().avaliar(ambiente);
+		ambiente.map(id, valor);
 	}
 
-	private Map<Id, Valor> resolveValueBindings(AmbienteExecucao ambiente)
+	private void resolveValueBindings(AmbienteExecucao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 
-		Map<Id, Valor> resolvedValues = new HashMap<Id, Valor>();
-
 		for (DecVariavel declaration : this.seqdecVariavel) {
-			resolvedValues.put(declaration.getId(), declaration.getExpressao()
-					.avaliar(ambiente));
+			includeValueBinding(ambiente, declaration);
 		}
-		return resolvedValues;
 	}
 
 	/**
@@ -70,12 +63,9 @@ public class ExpDeclaracao implements Expressao {
 	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		ambiente.incrementa();
-		Map<Id, Tipo> resolvedTypes;
 		boolean result = false;
 		try {
 			if (this.checkTypeBindings(ambiente)) {
-				resolvedTypes = this.resolveTypeBindings(ambiente);
-				this.includeTypeBindings(ambiente, resolvedTypes);
 				result = expressao.checaTipo(ambiente);
 			} else {
 				result = false;
@@ -86,28 +76,22 @@ public class ExpDeclaracao implements Expressao {
 		return result;
 	}
 
-	private void includeTypeBindings(AmbienteCompilacao ambiente,
-			Map<Id, Tipo> resolvedTypes) throws VariavelJaDeclaradaException {
 
-		for (Id id : resolvedTypes.keySet()) {
-			Tipo type = resolvedTypes.get(id);
-			ambiente.map(id, type);
-		}
-	}
-
-	private Map<Id, Tipo> resolveTypeBindings(AmbienteCompilacao ambiente)
+	private void resolveTypeBindings(AmbienteCompilacao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 
-		Map<Id, Tipo> resolvedTypes = new HashMap<Id, Tipo>();
-
+		//sequential let
 		for (DecVariavel declaration : this.seqdecVariavel) {
-			if (resolvedTypes.put(declaration.getId(), declaration
-					.getExpressao().getTipo(ambiente)) != null)
-				throw new VariavelJaDeclaradaException(declaration.getId());
-
+			Id id = declaration.getId();
+			Tipo tipo = declaration.getExpressao().getTipo(ambiente);
+			ambiente.map(id, tipo);
 		}
-
-		return resolvedTypes;
+	}
+	
+	private void resolveTypeBinding(AmbienteCompilacao ambiente, DecVariavel declaration) {
+		Id id = declaration.getId();
+		Tipo tipo = declaration.getExpressao().getTipo(ambiente);
+		ambiente.map(id, tipo);
 	}
 
 	private boolean checkTypeBindings(AmbienteCompilacao ambiente)
@@ -120,6 +104,7 @@ public class ExpDeclaracao implements Expressao {
 				result = false;
 				break;
 			}
+			resolveTypeBinding(ambiente, declaration);
 		}
 		return result;
 	}
@@ -140,8 +125,7 @@ public class ExpDeclaracao implements Expressao {
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		ambiente.incrementa();
 
-		Map<Id, Tipo> resolvedTypes = this.resolveTypeBindings(ambiente);
-		this.includeTypeBindings(ambiente, resolvedTypes);
+		this.resolveTypeBindings(ambiente);
 		Tipo result = expressao.getTipo(ambiente);
 
 		ambiente.restaura();
