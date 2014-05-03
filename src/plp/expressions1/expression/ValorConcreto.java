@@ -29,6 +29,7 @@ public abstract class ValorConcreto<T> implements Valor {
 
 	/**
 	 * Retorna o string encapsulado pelo objeto desta classe
+	 * obs de Bruno: String ou char, depois das modificações do exercicio LE1
 	 */
 	public T valor(){
 		return valor;
