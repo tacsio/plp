@@ -38,6 +38,8 @@ public interface Tipo {
 
 	public abstract boolean eChar();
 	
+	public abstract boolean eReal();
+	
 	/**
 	 * Compara este tipo com o tipo dado.
 	 * Dois tipos são iguais se eles têm o mesmo nome.
