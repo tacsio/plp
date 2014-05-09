@@ -6,3 +6,5 @@
 *bin-test
 applet
 *.db
+**/parser/*.java
+*Parser*.java
