@@ -39,13 +39,16 @@ public class Contexto<T> {
 	 *                se já existir um mapeamento do identificador nesta tabela.
 	 */
 	public void map(Id idArg, T valorId) throws VariavelJaDeclaradaException {
-		try {
+		//Foi preciso modificar o trecho abaixo para permitir que caso a variável já tenha 
+		//sido declarada, possa ser atualizada.
+		//try {
 			HashMap<Id, T> aux = pilha.peek();
-			if (aux.put(idArg, valorId) != null)
-				throw new IdentificadorJaDeclaradoException();
-		} catch (IdentificadorJaDeclaradoException e) {
-			throw new VariavelJaDeclaradaException(idArg);
-		}
+			aux.put(idArg, valorId);
+			//if (aux.put(idArg, valorId) != null)
+				//throw new IdentificadorJaDeclaradoException();
+		//} catch (IdentificadorJaDeclaradoException e) {
+		//	throw new VariavelJaDeclaradaException(idArg);
+		//}
 	}
 
 	/**

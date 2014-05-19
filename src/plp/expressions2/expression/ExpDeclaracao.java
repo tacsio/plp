@@ -27,7 +27,10 @@ public class ExpDeclaracao implements Expressao {
 
 		ambiente.incrementa();
 		Map<Id, Valor> resolvedValues = resolveValueBindings(ambiente);
-		includeValueBindings(ambiente, resolvedValues);
+		//a chamada abaixo foi movida para o resolveValueBindings, desta forma
+		//os bindings das subdeclarações já ficam no ambiente a medida que são avaliados,
+		//podendo inclusive serem utilizando em outras subdeclarações.
+		//includeValueBindings(ambiente, resolvedValues);
 		Valor result = expressao.avaliar(ambiente);
 		ambiente.restaura();
 
@@ -50,6 +53,9 @@ public class ExpDeclaracao implements Expressao {
 		for (DecVariavel declaration : this.seqdecVariavel) {
 			resolvedValues.put(declaration.getId(), declaration.getExpressao()
 					.avaliar(ambiente));
+			
+			//Aqui está a chamada para incluir cada binding das subdeclarações no ambiente.
+			includeValueBindings(ambiente, resolvedValues);
 		}
 		return resolvedValues;
 	}
