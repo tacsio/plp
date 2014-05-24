@@ -41,14 +41,18 @@ public class Contexto<T> {
 	public void map(Id idArg, T valorId) throws VariavelJaDeclaradaException {
 		//Foi preciso modificar o trecho abaixo para permitir que caso a variável já tenha 
 		//sido declarada, possa ser atualizada.
-		//try {
+		try {
 			HashMap<Id, T> aux = pilha.peek();
+
 			aux.put(idArg, valorId);
-			//if (aux.put(idArg, valorId) != null)
+			
+			//as variaveis podem ser atualizadas no let sequencial
+			if (aux.put(idArg, valorId) != null){}
 				//throw new IdentificadorJaDeclaradoException();
-		//} catch (IdentificadorJaDeclaradoException e) {
-		//	throw new VariavelJaDeclaradaException(idArg);
-		//}
+		} catch (IdentificadorJaDeclaradoException e) {
+			throw new VariavelJaDeclaradaException(idArg);
+		}
+
 	}
 
 	/**

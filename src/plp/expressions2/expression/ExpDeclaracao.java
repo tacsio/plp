@@ -76,12 +76,9 @@ public class ExpDeclaracao implements Expressao {
 	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		ambiente.incrementa();
-		Map<Id, Tipo> resolvedTypes;
 		boolean result = false;
 		try {
 			if (this.checkTypeBindings(ambiente)) {
-				resolvedTypes = this.resolveTypeBindings(ambiente);
-				this.includeTypeBindings(ambiente, resolvedTypes);
 				result = expressao.checaTipo(ambiente);
 			} else {
 				result = false;
@@ -107,9 +104,10 @@ public class ExpDeclaracao implements Expressao {
 		Map<Id, Tipo> resolvedTypes = new HashMap<Id, Tipo>();
 
 		for (DecVariavel declaration : this.seqdecVariavel) {
+			//as variavies podem ser atualizadas no let sequencial.
 			if (resolvedTypes.put(declaration.getId(), declaration
-					.getExpressao().getTipo(ambiente)) != null)
-				throw new VariavelJaDeclaradaException(declaration.getId());
+					.getExpressao().getTipo(ambiente)) != null){}
+				//throw new VariavelJaDeclaradaException(declaration.getId());
 
 		}
 
@@ -121,10 +119,16 @@ public class ExpDeclaracao implements Expressao {
 
 		boolean result = true;
 
+		Map<Id, Tipo> resolvedTypes = new HashMap<Id, Tipo>();
+		
 		for (DecVariavel declaration : this.seqdecVariavel) {
 			if (!declaration.getExpressao().checaTipo(ambiente)) {
 				result = false;
 				break;
+			} else {
+				resolvedTypes.put(declaration.getId(), declaration
+						.getExpressao().getTipo(ambiente));
+				this.includeTypeBindings(ambiente, resolvedTypes);
 			}
 		}
 		return result;
