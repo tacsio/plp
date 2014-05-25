@@ -1,5 +1,7 @@
 package plp.orientadaObjetos3.memoria;
 
-public class ContextoExecucaoOO3 {
+import plp.orientadaObjetos2.memoria.ContextoExecucaoOO2;
+
+public class ContextoExecucaoOO3 extends ContextoExecucaoOO2 {
 
 }
