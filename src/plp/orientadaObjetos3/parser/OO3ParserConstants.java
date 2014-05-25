@@ -28,49 +28,50 @@ public interface OO3ParserConstants {
   int NULL = 27;
   int PROC = 28;
   int EXTENDS = 29;
-  int INT = 30;
-  int BOOLEAN = 31;
-  int STRING = 32;
-  int INTEGER_LITERAL = 33;
-  int DECIMAL_LITERAL = 34;
-  int HEX_LITERAL = 35;
-  int OCTAL_LITERAL = 36;
-  int STRING_LITERAL = 37;
-  int IDENTIFIER = 38;
-  int LETTER = 39;
-  int DIGIT = 40;
-  int LPAREN = 41;
-  int RPAREN = 42;
-  int LBRACE = 43;
-  int RBRACE = 44;
-  int LBRACKET = 45;
-  int RBRACKET = 46;
-  int SEMICOLON = 47;
-  int COMMA = 48;
-  int DOT = 49;
-  int ATTRIB = 50;
-  int ASSIGN = 51;
-  int GT = 52;
-  int LT = 53;
-  int BANG = 54;
-  int TILDE = 55;
-  int HOOK = 56;
-  int COLON = 57;
-  int EQ = 58;
-  int LE = 59;
-  int GE = 60;
-  int NE = 61;
-  int SC_OR = 62;
-  int SC_AND = 63;
-  int CONCAT = 64;
-  int PLUS = 65;
-  int MINUS = 66;
-  int STAR = 67;
-  int SLASH = 68;
-  int BIT_AND = 69;
-  int BIT_OR = 70;
-  int XOR = 71;
-  int REM = 72;
+  int INCLUDE = 30;
+  int INT = 31;
+  int BOOLEAN = 32;
+  int STRING = 33;
+  int INTEGER_LITERAL = 34;
+  int DECIMAL_LITERAL = 35;
+  int HEX_LITERAL = 36;
+  int OCTAL_LITERAL = 37;
+  int STRING_LITERAL = 38;
+  int IDENTIFIER = 39;
+  int LETTER = 40;
+  int DIGIT = 41;
+  int LPAREN = 42;
+  int RPAREN = 43;
+  int LBRACE = 44;
+  int RBRACE = 45;
+  int LBRACKET = 46;
+  int RBRACKET = 47;
+  int SEMICOLON = 48;
+  int COMMA = 49;
+  int DOT = 50;
+  int ATTRIB = 51;
+  int ASSIGN = 52;
+  int GT = 53;
+  int LT = 54;
+  int BANG = 55;
+  int TILDE = 56;
+  int HOOK = 57;
+  int COLON = 58;
+  int EQ = 59;
+  int LE = 60;
+  int GE = 61;
+  int NE = 62;
+  int SC_OR = 63;
+  int SC_AND = 64;
+  int CONCAT = 65;
+  int PLUS = 66;
+  int MINUS = 67;
+  int STAR = 68;
+  int SLASH = 69;
+  int BIT_AND = 70;
+  int BIT_OR = 71;
+  int XOR = 72;
+  int REM = 73;
 
   int DEFAULT = 0;
 
@@ -105,6 +106,7 @@ public interface OO3ParserConstants {
     "\"null\"",
     "\"proc\"",
     "\"extends\"",
+    "\"include\"",
     "\"int\"",
     "\"boolean\"",
     "\"string\"",
