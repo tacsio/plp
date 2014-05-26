@@ -1,14 +1,36 @@
 package plp.orientadaObjetos3.modulo;
 
-import plp.imperative1.util.Lista;
+import java.util.HashSet;
+import java.util.Iterator;
+
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 
-public class ListaId extends Lista<Id>{
+public class ListaId extends HashSet<Id> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2479577085391204540L;
+
+	public ListaId() {
+		super();
+	}
 
 	public ListaId(Id valor) {
-		super(valor, null);
+		super();
+		this.add(valor);
 	}
-	public ListaId(Id valor, ListaId lista){
-		super(valor, lista);
+
+	public ListaId(Id valor, ListaId lista) {
+		super();
+		this.add(valor);
+		this.addAll(lista);
+	}
+	
+	public void printLista(){
+		Iterator<Id> it = this.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}
 	}
 }

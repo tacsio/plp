@@ -63,6 +63,7 @@ import plp.orientadaObjetos2.comando.*;
 import plp.orientadaObjetos2.expressao.leftExpression.*;
 import plp.orientadaObjetos2.declaracao.variavel.DecVariavelObjetoOO2;
 import plp.orientadaObjetos3.modulo.ListaId;
+import plp.orientadaObjetos3.modulo.UsaModulo;
 
 /**
  * Parser para a Linguagem de Programacao Orientada a Objetos 2
@@ -955,6 +956,57 @@ Id PId() :
 }
 
 /**
+* UsaModulo ::= "include" ListaId [“;” UsaModulo]
+*               | "extends" ListaId [“;” UsaModulo]
+**/
+UsaModulo PUsaModulo() :
+{  ListaId listaInclude = null;
+  ListaId listaExtends = null;
+  UsaModulo retorno = null;
+  UsaModulo composto = null;}
+{
+  (
+    LOOKAHEAD(< INCLUDE > PListaId() <  SEMICOLON > (< INCLUDE > | < EXTENDS > ))
+    < INCLUDE > listaInclude = PListaId() < SEMICOLON > composto = PUsaModulo()    {		composto.addInclude(listaInclude);
+		retorno = composto;
+    }
+    | LOOKAHEAD(< EXTENDS > PListaId() <  SEMICOLON > (< INCLUDE > | < EXTENDS > ))
+    < EXTENDS > listaExtends = PListaId() < SEMICOLON > composto = PUsaModulo()    {
+      composto.addExtends(listaExtends);
+      retorno = composto;    }
+    | LOOKAHEAD(< EXTENDS > PListaId())
+      listaExtends = PListaExtends()      {		retorno = new UsaModulo(listaInclude, listaExtends);
+      }
+    | LOOKAHEAD(< INCLUDE > PListaId())
+      listaInclude = PListaInclude()      {		retorno = new UsaModulo(listaInclude, listaExtends);
+      }  )
+  {
+    return retorno;  }}
+
+/**
+* ListaExtends
+**/
+ListaId PListaInclude() :
+{
+  ListaId listaInclude;}
+{	
+  < INCLUDE > listaInclude = PListaId()  {	return listaInclude;
+  }}
+
+/**
+*  ListaExtends**/
+ListaId PListaExtends() :
+{
+  ListaId listaExtends;
+}
+{	
+  < EXTENDS > listaExtends = PListaId()
+  {
+	return listaExtends;
+  }
+}
+
+/**
  *  ListaId ::= Id | Id "," ListaId
  **/
 ListaId PListaId() :
@@ -1149,7 +1201,7 @@ DecClasse PDecClasseAtomica() :
 		LOOKAHEAD(<CLASSE> PId() <EXTENDS> PId())
 		(
 			<CLASSE> nomeClasse = PId() <EXTENDS> superClasse = PId()
-			<LBRACE> 
+			<LBRACE>
 				atributos = PDecVariavel() <SEMICOLON>
 				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
 				metodos = PDecProcedimento() 
