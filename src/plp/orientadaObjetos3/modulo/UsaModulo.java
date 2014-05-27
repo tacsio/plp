@@ -35,20 +35,6 @@ public class UsaModulo {
 		this.listaExtends.addAll(listaExtends);
 	}
 	
-	public void printUsaModulo(){
-		System.out.println("Included modules:");
-		System.out.print("[");
-		this.listaInclude.printLista();
-		System.out.println("]");
-		System.out.println();
-		
-		System.out.println("Extends modules:");
-		System.out.print("[");
-		this.listaExtends.printLista();
-		System.out.println("]");
-		System.out.println();
-	}
-
 	public ListaId getListaExtends() {
 		return this.listaExtends;
 	}

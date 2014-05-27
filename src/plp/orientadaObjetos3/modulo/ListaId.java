@@ -26,16 +26,19 @@ public class ListaId extends HashSet<Id> {
 		this.add(valor);
 		this.addAll(lista);
 	}
-	
-	public void printLista(){
+
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+
 		Iterator<Id> it = this.iterator();
 		boolean first = true;
-		while(it.hasNext()){
-			if(first) {
-				System.out.print(it.next());
+		while (it.hasNext()) {
+			if (first) {
+				buffer.append(it.next());
 				first = false;
 			} else
-				System.out.print(", " + it.next());	
+				buffer.append(", " + it.next());
 		}
+		return buffer.toString();
 	}
 }

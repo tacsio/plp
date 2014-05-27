@@ -1,7 +1,15 @@
 {
 
+	module Teste {
+	
+		int constanteTeste = 0;
+		
+	} ,
+	
 	classe Contador  {
-
+		include modulo1, modulo3;
+		extends modulo2;
+		
 		int valor = 0;
 
 		Contador(int i){
@@ -20,5 +28,7 @@
 		cont.print();
 		cont2.print()
 	}
+	
+	
 
 }

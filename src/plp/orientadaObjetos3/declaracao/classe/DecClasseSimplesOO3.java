@@ -20,7 +20,25 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 
 		this.listaExtends = usaModulo.getListaExtends();
 		this.listaInclude = usaModulo.getListaInclude();
+	}
+	
+	
+	public String toString() {
+		StringBuffer retorno = new StringBuffer();
+		retorno.append(this.nomeClasse);
+		retorno.append("\n");
 		
-		usaModulo.printUsaModulo();
+		retorno.append("Included modules:");
+		retorno.append("[");
+		retorno.append(this.listaInclude);
+		retorno.append("]\n");
+		
+		retorno.append("Extends modules:");
+		retorno.append("[");
+		retorno.append(this.listaExtends);
+		retorno.append("]\n");
+		retorno.append("\n");
+		
+		return retorno.toString();
 	}
 }
