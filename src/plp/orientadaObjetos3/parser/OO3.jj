@@ -64,6 +64,7 @@ import plp.orientadaObjetos2.expressao.leftExpression.*;
 import plp.orientadaObjetos2.declaracao.variavel.DecVariavelObjetoOO2;
 import plp.orientadaObjetos3.modulo.ListaId;
 import plp.orientadaObjetos3.modulo.UsaModulo;
+import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
 
 /**
  * Parser para a Linguagem de Programacao Orientada a Objetos 2
@@ -100,9 +101,9 @@ public class OO3Parser
     else
     {
       System.out.println("OO3 PLP Parser Version 0.0.1:  Usage is one of:");
-      System.out.println("         java OO2Parser < inputfile");
+      System.out.println("         java OO3Parser < inputfile");
       System.out.println("OR");
-      System.out.println("         java OO2Parser inputfile");
+      System.out.println("         java OO3Parser inputfile");
       return;
     }
     try
@@ -956,8 +957,8 @@ Id PId() :
 }
 
 /**
-* UsaModulo ::= "include" ListaId [“;” UsaModulo]
-*               | "extends" ListaId [“;” UsaModulo]
+* UsaModulo ::= "include" ListaId [â€œ;â€� UsaModulo]
+*               | "extends" ListaId [â€œ;â€� UsaModulo]
 **/
 UsaModulo PUsaModulo() :
 {  ListaId listaInclude = null;
@@ -1093,8 +1094,8 @@ AcessoAtributoIdOO2 PAcessoAtributoId() :
 }
 
 /**
- * Uma expressao chamadora eh aquela que chama um m�todo. Ela sabe separar
- * o acesso de atributo, que � o que ela retorna, da chamada do m�todo em si
+ * Uma expressao chamadora eh aquela que chama um mï¿½todo. Ela sabe separar
+ * o acesso de atributo, que ï¿½ o que ela retorna, da chamada do mï¿½todo em si
  * (<DOT><IDENTIFIER><LPAREN>).
  *
  * PExpressaoChamadora:: this | id | LeftExpressionChamadora
@@ -1195,6 +1196,7 @@ DecClasse PDecClasseAtomica() :
   DecConstrutor decConstrutor = null;
   DecProcedimento metodos;
   DecClasse resposta;
+  UsaModulo usaModulo = null;
 }
 {
 	(
@@ -1202,12 +1204,14 @@ DecClasse PDecClasseAtomica() :
 		(
 			<CLASSE> nomeClasse = PId() <EXTENDS> superClasse = PId()
 			<LBRACE>
+				[usaModulo = PUsaModulo() <SEMICOLON>]
 				atributos = PDecVariavel() <SEMICOLON>
 				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
 				metodos = PDecProcedimento() 
 			<RBRACE>
 			{
-				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
+			  	if(usaModulo == null) { usaModulo = new UsaModulo();}
+				resposta = new DecClasseSimplesOO3(nomeClasse, superClasse, usaModulo, atributos, decConstrutor, metodos);
 			}	
 		)
 		|
@@ -1215,12 +1219,14 @@ DecClasse PDecClasseAtomica() :
 		(
 			<CLASSE> nomeClasse = PId() 
 			<LBRACE>
+				[usaModulo = PUsaModulo() <SEMICOLON>]
 				atributos = PDecVariavel() <SEMICOLON>
 				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
 				metodos = PDecProcedimento() 
 			<RBRACE>
 			{
-				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
+			  	if(usaModulo == null) { usaModulo = new UsaModulo();}
+				resposta = new DecClasseSimplesOO3(nomeClasse, superClasse, usaModulo, atributos, decConstrutor, metodos);
 			}
 		) 
 	)

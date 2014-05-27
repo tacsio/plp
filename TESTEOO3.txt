@@ -2,10 +2,6 @@
 
 	classe Contador  {
 
-		extends modulo1, modulo2, modulo3;
-		include modulo4, modulo5, modulo6;
-		extends modulo2 , modulo7, modulo4;
-		
 		int valor = 0;
 
 		Contador(int i){

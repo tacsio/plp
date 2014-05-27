@@ -57,6 +57,7 @@ import plp.orientadaObjetos2.expressao.leftExpression.*;
 import plp.orientadaObjetos2.declaracao.variavel.DecVariavelObjetoOO2;
 import plp.orientadaObjetos3.modulo.ListaId;
 import plp.orientadaObjetos3.modulo.UsaModulo;
+import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
 
 public class OO3ParserTokenManager implements OO3ParserConstants
 {

@@ -29,8 +29,13 @@ public class ListaId extends HashSet<Id> {
 	
 	public void printLista(){
 		Iterator<Id> it = this.iterator();
+		boolean first = true;
 		while(it.hasNext()){
-			System.out.println(it.next());
+			if(first) {
+				System.out.print(it.next());
+				first = false;
+			} else
+				System.out.print(", " + it.next());	
 		}
 	}
 }
