@@ -2,9 +2,25 @@
 
 	module Teste {
 	
-		int constanteTeste = 0;
+		int constanteTeste = 1;
+		
+		proc print() {
+			write("this.valor")
+		},
+		
+		proc printSoma(int i, int j) {
+			write(i +j)
+		},
+		
+		proc printSoma3(int i, int j, int k) {
+			write(i +j)
+		}
 		
 	} ,
+	
+	module Teste2 {
+		int constanteTeste = 2;
+	}, 
 	
 	classe Contador  {
 		include modulo1, modulo3;
