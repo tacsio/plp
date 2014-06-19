@@ -78,7 +78,9 @@ public class DecModulo implements Declaracao {
 			ProcedimentoNaoDeclaradoException, ClasseJaDeclaradaException,
 			ObjetoNaoDeclaradoException, ObjetoJaDeclaradoException {
 
-		// TODO Auto-generated method stub
+		DefModulo defModulo = new DefModulo(id, decConstantes, decProcedimento);
+		((AmbienteExecucaoOO3) ambiente).mapDefModulo(id, defModulo);
+		
 		return (AmbienteExecucaoOO3) ambiente;
 	}
 }

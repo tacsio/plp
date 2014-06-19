@@ -5,8 +5,7 @@ import java.util.Map;
 import java.util.Stack;
 
 import plp.expressions2.memory.IdentificadorJaDeclaradoException;
-import plp.expressions2.memory.VariavelJaDeclaradaException;
-import plp.orientadaObjetos1.declaracao.procedimento.ListaDeclaracaoParametro;
+import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.memoria.colecao.ListaValor;
 import plp.orientadaObjetos1.util.Tipo;
@@ -43,6 +42,34 @@ public class ContextoCompilacaoOO3 extends ContextoCompilacaoOO2 implements
 		pilhaConstantes.pop();
 	}
 
+	@Override
+	public Tipo get(plp.expressions2.expression.Id idArg)
+			throws VariavelNaoDeclaradaException {
+		Tipo tipo = null;
+
+		try {
+			tipo = super.get(idArg);
+		} catch (VariavelNaoDeclaradaException e) {
+
+			// TODO: extrair metodo
+			Stack<HashMap<Id, Tipo>> auxStack = new Stack<HashMap<Id, Tipo>>();
+			while (tipo == null && !pilhaConstantes.empty()) {
+				HashMap<Id, Tipo> aux = pilhaConstantes.pop();
+				auxStack.push(aux);
+				tipo = aux.get(idArg);
+			}
+			while (!auxStack.empty()) {
+				pilhaConstantes.push(auxStack.pop());
+			}
+			if (tipo == null) {
+				throw new VariavelNaoDeclaradaException(idArg);
+			}
+		}
+
+		return tipo;
+
+	}
+
 	public void mapConstantes(Id id, Tipo tipo)
 			throws IdentificadorJaDeclaradoException {
 		HashMap<Id, Tipo> aux = pilhaConstantes.peek();
@@ -51,5 +78,15 @@ public class ContextoCompilacaoOO3 extends ContextoCompilacaoOO2 implements
 			throw new IdentificadorJaDeclaradoException("Constante " + id
 					+ " já declarada");
 		}
+	}
+
+	public DefModulo getDefModulo(Id id) {
+		DefModulo retorno = null;
+		
+		if (this.mapDefModulo.containsKey(id)) {
+			retorno = mapDefModulo.get(id);
+		}
+
+		return retorno;
 	}
 }

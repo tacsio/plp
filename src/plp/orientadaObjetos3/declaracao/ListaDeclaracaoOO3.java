@@ -52,54 +52,52 @@ public class ListaDeclaracaoOO3 extends Lista<Declaracao> {
 
 	public boolean checaTipo(AmbienteCompilacaoOO3 ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
-			ClasseJaDeclaradaException, 
-			ProcedimentoNaoDeclaradoException,
+			ClasseJaDeclaradaException, ProcedimentoNaoDeclaradoException,
 			ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException,
 			ModuloJaDeclaradoException, ClasseNaoDeclaradaException {
 
 		boolean ret = false;
 		Declaracao declaracao = getHead();
 
-		if(declaracao instanceof DecClasse) {
+		if (declaracao instanceof DecClasse) {
 			DecClasseSimplesOO3 classe = (DecClasseSimplesOO3) declaracao;
 			ret = classe.checaTipo(ambiente);
 		} else if (declaracao instanceof DecModulo) {
 			DecModulo modulo = (DecModulo) declaracao;
 			ret = modulo.checaTipo(ambiente);
 		}
-		
-		//passo recursivo
+
+		// passo recursivo
 		if (ret && length() > 1) {
 			ret = ((ListaDeclaracaoOO3) getTail()).checaTipo(ambiente);
 		}
-		
+
 		return ret;
 
 	}
-	
+
 	public AmbienteExecucaoOO3 elabora(AmbienteExecucaoOO3 ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 			ProcedimentoJaDeclaradoException,
 			ProcedimentoNaoDeclaradoException, ClasseJaDeclaradaException,
-			 ObjetoNaoDeclaradoException,
- ObjetoJaDeclaradoException,
+			ObjetoNaoDeclaradoException, ObjetoJaDeclaradoException,
 			ConstrutorNaoDeclaradoException, ClasseNaoDeclaradaException {
-		
+
 		Declaracao declaracao = getHead();
-		
-		if(declaracao instanceof DecClasse) {
-			DecClasseSimplesOO2 classe = (DecClasseSimplesOO2) declaracao;
-			ambiente = (AmbienteExecucaoOO3) classe.elabora(ambiente);
+
+		if (declaracao instanceof DecClasse) {
+			DecClasseSimplesOO3 classe = (DecClasseSimplesOO3) declaracao;
+			ambiente = classe.elabora(ambiente);
 		} else if (declaracao instanceof DecModulo) {
 			DecModulo modulo = (DecModulo) declaracao;
 			ambiente = (AmbienteExecucaoOO3) modulo.elabora(ambiente);
 		}
-		
-		//passo recursivo
+
+		// passo recursivo
 		if (length() > 1) {
 			ambiente = ((ListaDeclaracaoOO3) getTail()).elabora(ambiente);
 		}
-		
+
 		return ambiente;
 	}
 
@@ -113,8 +111,8 @@ public class ListaDeclaracaoOO3 extends Lista<Declaracao> {
 		System.out.println("Modulos declarados:");
 		for (DecModulo decModulo : modulos) {
 			System.out.println("Name: " + decModulo.getId());
-			//System.out.println("Constantes: "
-				//	+ decModulo.getDecConstantes().count());
+			// System.out.println("Constantes: "
+			// + decModulo.getDecConstantes().count());
 		}
 		System.out.println();
 
@@ -124,5 +122,5 @@ public class ListaDeclaracaoOO3 extends Lista<Declaracao> {
 		System.out.println();
 		System.out.println();
 	}
-	
+
 }

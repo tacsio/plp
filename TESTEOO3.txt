@@ -4,32 +4,14 @@
 	
 		int constanteTeste = 2;
 		
-		
-		proc print() {
-			write("this.valor")
-		},
-		
-		proc printSoma(int i, int j) {
-			write(i +j)
-		},
-		
 		proc printSoma3(int i, int j, int k) {
-			write(i +j)
+			write(i +j + constanteTeste)
 		}
 		
 	} ,
 	
-	module Teste2 {
-		
-		
-		proc print() {
-			write("this.valor")
-		}
-	}, 
-	
 	classe Contador  {
-		include modulo1, modulo3;
-		extends modulo2;
+		include Teste;
 		
 		int valor = 0;
 
@@ -44,10 +26,10 @@
 	};
 
 	{
-		Contador cont := new Contador(1),
-		Contador cont2 := new Contador(2);
+		Contador cont := new Contador(1);
 		cont.print();
-		cont2.print()
+		cont.printSoma3(1,1,1)
+		
 	}
 	
 	

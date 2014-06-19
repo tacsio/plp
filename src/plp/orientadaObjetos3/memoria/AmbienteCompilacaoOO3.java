@@ -11,5 +11,7 @@ public interface AmbienteCompilacaoOO3 extends AmbienteCompilacaoOO2 {
 	public void mapDefModulo(Id id, DefModulo defModulo) throws ModuloJaDeclaradoException;
 
 	public void mapConstantes(Id id, Tipo tipo) throws IdentificadorJaDeclaradoException;
-
+	
+	public DefModulo getDefModulo(Id id);
+	
 }

@@ -49,7 +49,6 @@ import plp.orientadaObjetos1.util.TipoClasse;
 import plp.orientadaObjetos1.util.TipoPrimitivo;
 import plp.orientadaObjetos3.Programa;
 import plp.orientadaObjetos2.declaracao.DecConstrutor;
-import plp.orientadaObjetos2.declaracao.classe.DecClasseSimplesOO2;
 import plp.orientadaObjetos3.memoria.ContextoCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos2.comando.*;
@@ -61,6 +60,7 @@ import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
 import plp.orientadaObjetos3.declaracao.constante.*;
 import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.declaracao.ListaDeclaracaoOO3;
+import plp.orientadaObjetos3.comando.ChamadaMetodoOO3;
 
 /** * Parser para a Linguagem de Programacao Orientada a Objetos 2 */
 public class OO3Parser implements OO3ParserConstants {
@@ -330,7 +330,7 @@ public class OO3Parser implements OO3ParserConstants {
     {
       parametros = new ListaExpressao();
     }
-    {if (true) return new ChamadaMetodoOO2(expressao, nomeMetodo, parametros);}
+    {if (true) return new ChamadaMetodoOO3(expressao, nomeMetodo, parametros);}
     throw new Error("Missing return statement in function");
   }
 

@@ -48,7 +48,6 @@ import plp.orientadaObjetos1.util.TipoClasse;
 import plp.orientadaObjetos1.util.TipoPrimitivo;
 import plp.orientadaObjetos3.Programa;
 import plp.orientadaObjetos2.declaracao.DecConstrutor;
-import plp.orientadaObjetos2.declaracao.classe.DecClasseSimplesOO2;
 import plp.orientadaObjetos3.memoria.ContextoCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos2.comando.*;
@@ -60,6 +59,7 @@ import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
 import plp.orientadaObjetos3.declaracao.constante.*;
 import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.declaracao.ListaDeclaracaoOO3;
+import plp.orientadaObjetos3.comando.ChamadaMetodoOO3;
 
 public class OO3ParserTokenManager implements OO3ParserConstants
 {

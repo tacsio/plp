@@ -1,6 +1,8 @@
 package plp.orientadaObjetos3.memoria;
 
+import plp.orientadaObjetos1.comando.Procedimento;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
+import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos3.declaracao.constante.DecConstantes;
 
@@ -28,6 +30,11 @@ public class DefModulo {
 
 	public DecProcedimento getDecProcedimento() {
 		return decProcedimento;
+	}
+	
+	public Procedimento getProcedimento(Id id)
+			throws ProcedimentoNaoDeclaradoException{
+		return decProcedimento.getProcedimento(id);
 	}
 
 }
