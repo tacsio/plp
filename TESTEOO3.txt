@@ -2,7 +2,8 @@
 
 	module Teste {
 	
-		int constanteTeste = 1;
+		int constanteTeste = 2;
+		
 		
 		proc print() {
 			write("this.valor")
@@ -19,7 +20,11 @@
 	} ,
 	
 	module Teste2 {
-		int constanteTeste = 2;
+		
+		
+		proc print() {
+			write("this.valor")
+		}
 	}, 
 	
 	classe Contador  {

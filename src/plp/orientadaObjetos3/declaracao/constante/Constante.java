@@ -5,7 +5,6 @@ import plp.orientadaObjetos1.expressao.valor.Valor;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import plp.orientadaObjetos1.util.Tipo;
 import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
-import plp.orientadaObjetos3.memoria.DefConstante;
 
 public class Constante {
 	private Id id;
@@ -24,8 +23,7 @@ public class Constante {
 		ret = valor.getTipo(ambiente).equals(tipo);
 		
 		if(ret){
-			DefConstante defConstante = new DefConstante(id, tipo, valor);
-			((AmbienteCompilacaoOO3) ambiente).mapConstantes(id, defConstante);
+			((AmbienteCompilacaoOO3) ambiente).mapConstantes(id, tipo);
 		}
 		
 		return ret;

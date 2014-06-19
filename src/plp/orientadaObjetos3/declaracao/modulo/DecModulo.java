@@ -55,15 +55,19 @@ public class DecModulo implements Declaracao {
 		DefModulo defModulo = new DefModulo(id, decConstantes, decProcedimento);
 		((AmbienteCompilacaoOO3) ambiente).mapDefModulo(id, defModulo);
 
+		ambiente.incrementa();
+		
 		if (decConstantes != null) {
 			ret = decConstantes.checaTipo(ambiente);
+		} else {
+			ret = true;
 		}
 
-		if (ret) {
-			if (decProcedimento != null) {
-				ret = decProcedimento.checaTipo(ambiente);
-			}
+		if (ret && decProcedimento != null) {
+			ret = decProcedimento.checaTipo(ambiente);
 		}
+		
+		ambiente.restaura();
 
 		return ret;
 	}

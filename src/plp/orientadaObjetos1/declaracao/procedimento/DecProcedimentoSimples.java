@@ -11,7 +11,7 @@ import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoExceptio
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 /**
- * Representa uma declaração de procedimento simples.
+ * Representa uma declaraï¿½ï¿½o de procedimento simples.
  */
 public class DecProcedimentoSimples implements  DecProcedimento {
     /**
@@ -19,7 +19,7 @@ public class DecProcedimentoSimples implements  DecProcedimento {
      */
     protected Id nome;
     /**
-     * Parâmetros do procedimento.
+     * Parï¿½metros do procedimento.
      */
     protected ListaDeclaracaoParametro parametrosFormais;
     /**
@@ -29,7 +29,7 @@ public class DecProcedimentoSimples implements  DecProcedimento {
     /**
      * Construtor.
      * @param nome Nome do procedimento.
-     * @param parametrosFormais Parâmetros do procedimento.
+     * @param parametrosFormais Parï¿½metros do procedimento.
      * @param comando Comando(s) executado(s) pelo procedimento.
      */
     public DecProcedimentoSimples(Id nome, ListaDeclaracaoParametro parametrosFormais,Comando comando){
@@ -38,10 +38,10 @@ public class DecProcedimentoSimples implements  DecProcedimento {
         this.comando = comando;
     }
     /**
-     * Obtém o procedimento representado por nome.
+     * Obtï¿½m o procedimento representado por nome.
      * @param nome O nome do procedimento procurado.
      * @return o procedimento identificado por nome.
-     * @throws ProcedimentoNaoDeclaradoException quando não existe nenhum
+     * @throws ProcedimentoNaoDeclaradoException quando nï¿½o existe nenhum
      * procedimento declarado com esse nome.
      */
     public Procedimento getProcedimento(Id nome) throws ProcedimentoNaoDeclaradoException {
@@ -53,11 +53,11 @@ public class DecProcedimentoSimples implements  DecProcedimento {
         }
     }
     /**
-     * Verifica se a declaração está bem tipada, ou seja, se os
-     * comandos estão bem tipados.
+     * Verifica se a declaraï¿½ï¿½o estï¿½ bem tipada, ou seja, se os
+     * comandos estï¿½o bem tipados.
      * @param ambiente o ambiente que contem o mapeamento entre identificadores
      *  e seus tipos.
-     * @return <code>true</code> se os tipos dos comandos são válidos;
+     * @return <code>true</code> se os tipos dos comandos sï¿½o vï¿½lidos;
      *          <code>false</code> caso contrario.
      */
     public boolean checaTipo(AmbienteCompilacaoOO1 ambiente)

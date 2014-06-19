@@ -16,6 +16,7 @@ import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos2.declaracao.ConstrutorNaoDeclaradoException;
 import plp.orientadaObjetos2.declaracao.classe.DecClasseSimplesOO2;
+import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
 import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.excecao.declaracao.ModuloJaDeclaradoException;
 import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
@@ -60,7 +61,7 @@ public class ListaDeclaracaoOO3 extends Lista<Declaracao> {
 		Declaracao declaracao = getHead();
 
 		if(declaracao instanceof DecClasse) {
-			DecClasseSimplesOO2 classe = (DecClasseSimplesOO2) declaracao;
+			DecClasseSimplesOO3 classe = (DecClasseSimplesOO3) declaracao;
 			ret = classe.checaTipo(ambiente);
 		} else if (declaracao instanceof DecModulo) {
 			DecModulo modulo = (DecModulo) declaracao;
@@ -112,8 +113,8 @@ public class ListaDeclaracaoOO3 extends Lista<Declaracao> {
 		System.out.println("Modulos declarados:");
 		for (DecModulo decModulo : modulos) {
 			System.out.println("Name: " + decModulo.getId());
-			System.out.println("Constantes: "
-					+ decModulo.getDecConstantes().count());
+			//System.out.println("Constantes: "
+				//	+ decModulo.getDecConstantes().count());
 		}
 		System.out.println();
 
