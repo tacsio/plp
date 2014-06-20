@@ -1,9 +1,13 @@
 package plp.orientadaObjetos3.declaracao.constante;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 import plp.orientadaObjetos3.memoria.AmbienteExecucaoOO3;
@@ -45,6 +49,14 @@ public class DecConstantes {
 		}
 
 		return ambiente;
+	}
+
+	public Map<Id, Constante> getListaConstantes() {
+		Map<Id, Constante> mapConstantes = new HashMap<Id, Constante>();
+		for (Constante constante : listaConstantes) {
+			mapConstantes.put(constante.getId(), constante);
+		}
+		return mapConstantes;
 	}
 
 }

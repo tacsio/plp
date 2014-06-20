@@ -25,7 +25,7 @@
  
 		proc print() {
 			write(this.valor);
-			write(constanteTeste)
+			write(this.constanteTeste)
 			
 		}
  
@@ -34,7 +34,8 @@
 	{
 		Contador cont := new Contador(1);
 		cont.print();
-		cont.printSoma3(cont.valor,1,1)
+		cont.printSoma3(cont.valor,1,1);
+		write(cont.constanteTeste)
 		
 	}
 	

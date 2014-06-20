@@ -1,5 +1,8 @@
 package plp.orientadaObjetos3.declaracao.classe;
 
+import java.util.List;
+import java.util.Map;
+
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
@@ -15,6 +18,7 @@ import plp.orientadaObjetos2.declaracao.DecConstrutor;
 import plp.orientadaObjetos2.declaracao.classe.DecClasseSimplesOO2;
 import plp.orientadaObjetos2.memoria.AmbienteCompilacaoOO2;
 import plp.orientadaObjetos2.memoria.AmbienteExecucaoOO2;
+import plp.orientadaObjetos3.declaracao.constante.Constante;
 import plp.orientadaObjetos3.excecao.declaracao.ModuloNaoDeclaradoException;
 import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.AmbienteExecucaoOO3;
@@ -95,18 +99,23 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		ListaId extended = defClass.getListaExtends();
 
 		for (Id id : included) {
-			if(ambiente.getDefModulo(id) == null){
+			if (ambiente.getDefModulo(id) == null) {
 				throw new ModuloNaoDeclaradoException(id);
 			} else {
-				ambiente.getDefModulo(id).getDecConstantes().checaTipo(ambiente);
+				Map<Id, Constante> constantes = ambiente.getDefModulo(id)
+						.getDecConstantes().getListaConstantes();
+				
+				defClass.addConstantes(constantes);
 			}
 		}
-		
+
 		for (Id id : extended) {
-			if(ambiente.getDefModulo(id)==null){
+			if (ambiente.getDefModulo(id) == null) {
 				throw new ModuloNaoDeclaradoException(id);
 			} else {
-				ambiente.getDefModulo(id).getDecConstantes().checaTipo(ambiente);
+				//FIXME: ajuste constantes de classe
+				ambiente.getDefModulo(id).getDecConstantes()
+						.checaTipo(ambiente);
 			}
 		}
 	}
@@ -124,13 +133,13 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		if (nomeSuperClasse != null) {
 			ambiente.mapSuperClasse(nomeClasse, nomeSuperClasse);
 		}
-		
-		//elabora constantes de modulos
+
+		// elabora constantes de modulos
 		elaboraListaModulo((AmbienteExecucaoOO3) ambiente, defClass);
 
 		return (AmbienteExecucaoOO3) ambiente;
 	}
-	
+
 	private void elaboraListaModulo(AmbienteExecucaoOO3 ambiente,
 			DefClasseOO3 defClass) throws ModuloNaoDeclaradoException {
 
@@ -138,22 +147,21 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		ListaId extended = defClass.getListaExtends();
 
 		for (Id id : included) {
-			if(ambiente.getDefModulo(id) == null){
+			if (ambiente.getDefModulo(id) == null) {
 				throw new ModuloNaoDeclaradoException(id);
 			} else {
 				ambiente.getDefModulo(id).getDecConstantes().elabora(ambiente);
 			}
 		}
-		
+
 		for (Id id : extended) {
-			if(ambiente.getDefModulo(id)==null){
+			if (ambiente.getDefModulo(id) == null) {
 				throw new ModuloNaoDeclaradoException(id);
 			} else {
 				ambiente.getDefModulo(id).getDecConstantes().elabora(ambiente);
 			}
 		}
 	}
-	
 
 	public String toString() {
 		StringBuffer retorno = new StringBuffer();
