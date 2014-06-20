@@ -124,9 +124,36 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		if (nomeSuperClasse != null) {
 			ambiente.mapSuperClasse(nomeClasse, nomeSuperClasse);
 		}
+		
+		//elabora constantes de modulos
+		elaboraListaModulo((AmbienteExecucaoOO3) ambiente, defClass);
 
 		return (AmbienteExecucaoOO3) ambiente;
 	}
+	
+	private void elaboraListaModulo(AmbienteExecucaoOO3 ambiente,
+			DefClasseOO3 defClass) throws ModuloNaoDeclaradoException {
+
+		ListaId included = defClass.getListaInclude();
+		ListaId extended = defClass.getListaExtends();
+
+		for (Id id : included) {
+			if(ambiente.getDefModulo(id) == null){
+				throw new ModuloNaoDeclaradoException(id);
+			} else {
+				ambiente.getDefModulo(id).getDecConstantes().elabora(ambiente);
+			}
+		}
+		
+		for (Id id : extended) {
+			if(ambiente.getDefModulo(id)==null){
+				throw new ModuloNaoDeclaradoException(id);
+			} else {
+				ambiente.getDefModulo(id).getDecConstantes().elabora(ambiente);
+			}
+		}
+	}
+	
 
 	public String toString() {
 		StringBuffer retorno = new StringBuffer();

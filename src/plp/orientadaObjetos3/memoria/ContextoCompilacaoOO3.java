@@ -41,7 +41,7 @@ public class ContextoCompilacaoOO3 extends ContextoCompilacaoOO2 implements
 		super.restaura();
 		pilhaConstantes.pop();
 	}
-
+	
 	@Override
 	public Tipo get(plp.expressions2.expression.Id idArg)
 			throws VariavelNaoDeclaradaException {
@@ -74,10 +74,10 @@ public class ContextoCompilacaoOO3 extends ContextoCompilacaoOO2 implements
 			throws IdentificadorJaDeclaradoException {
 		HashMap<Id, Tipo> aux = pilhaConstantes.peek();
 
-		if (aux.put(id, tipo) != null) {
-			throw new IdentificadorJaDeclaradoException("Constante " + id
-					+ " já declarada");
+		if(!aux.containsKey(id)) {
+			aux.put(id, tipo);
 		}
+		
 	}
 
 	public DefModulo getDefModulo(Id id) {

@@ -2,7 +2,7 @@
  
 	module Teste {
 	
-		int constanteTeste = 4;
+		int constanteTeste = 2;
 		
 		proc printSoma3(int i, int j, int k) {
 			write(i +j + k)
@@ -10,8 +10,12 @@
 		
 	} ,
 	
+	module Teste2 {
+		int constanteTeste = 4;
+	},
+	
 	classe Contador  {
-		include Teste;
+		include Teste, Teste2;
 		
 		int valor = 0;
  
@@ -22,6 +26,7 @@
 		proc print() {
 			write(this.valor);
 			write(constanteTeste)
+			
 		}
  
 	};

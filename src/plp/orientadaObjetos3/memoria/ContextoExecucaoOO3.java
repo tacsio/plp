@@ -36,10 +36,9 @@ public class ContextoExecucaoOO3 extends ContextoExecucaoOO2 implements
 	public void mapConstantes(Id id, Valor valor)
 			throws IdentificadorJaDeclaradoException {
 		HashMap<Id, Valor> aux = pilhaConstantes.peek();
-
-		if (aux.put(id, valor) != null) {
-			throw new IdentificadorJaDeclaradoException("Constante " + id
-					+ " já declarada");
+		
+		if(!aux.containsKey(id)) {
+			aux.put(id, valor);
 		}
 	}
 

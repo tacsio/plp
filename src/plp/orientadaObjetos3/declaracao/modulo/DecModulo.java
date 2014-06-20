@@ -80,10 +80,6 @@ public class DecModulo implements Declaracao {
 
 		DefModulo defModulo = new DefModulo(id, decConstantes, decProcedimento);
 		((AmbienteExecucaoOO3) ambiente).mapDefModulo(id, defModulo);
-
-		if (decConstantes != null) {
-			ambiente = decConstantes.elabora((AmbienteExecucaoOO3) ambiente);
-		}
 		
 		return (AmbienteExecucaoOO3) ambiente;
 	}
