@@ -52,7 +52,7 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 				// tenta buscar o metodo no modulo;
 				metodo = buscaHierarquiaModuloInclude(ambiente, defClasse,
 						nomeMetodo);
-
+				
 				// tenta buscar o metodo na superclasse;
 			} catch (ProcedimentoNaoDeclaradoException e2) {
 				metodo = buscaHierarquiaSuperclasse(ambiente, defClasse,
@@ -120,9 +120,12 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 					}
 				}
 			}
-
 		}
 
+		if(metodo == null){
+			throw new ProcedimentoNaoDeclaradoException(nomeMetodo);
+		}
+		
 		return metodo;
 	}
 

@@ -144,7 +144,6 @@ public class OO3Parser implements OO3ParserConstants {
     jj_consume_token(SEMICOLON);
     comando = PComando();
     jj_consume_token(RBRACE);
-    declaracoes.printDeclaracoes();//TODO:remover
     {if (true) return new Programa(declaracoes, comando);}
     throw new Error("Missing return statement in function");
   }
@@ -1898,6 +1897,16 @@ public class OO3Parser implements OO3ParserConstants {
     finally { jj_save(59, xla); }
   }
 
+  final private boolean jj_3R_115() {
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_35() {
+    if (jj_3R_6()) return true;
+    return false;
+  }
+
   final private boolean jj_3R_114() {
     if (jj_3R_137()) return true;
     return false;
@@ -2627,24 +2636,24 @@ public class OO3Parser implements OO3ParserConstants {
     return false;
   }
 
+  final private boolean jj_3R_57() {
+    if (jj_3R_89()) return true;
+    return false;
+  }
+
   final private boolean jj_3_23() {
     if (jj_3R_12()) return true;
     return false;
   }
 
-  final private boolean jj_3R_57() {
-    if (jj_3R_89()) return true;
+  final private boolean jj_3R_10() {
+    if (jj_3R_8()) return true;
     return false;
   }
 
   final private boolean jj_3R_56() {
     if (jj_3R_91()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_10() {
-    if (jj_3R_8()) return true;
     return false;
   }
 
@@ -3481,16 +3490,6 @@ public class OO3Parser implements OO3ParserConstants {
 
   final private boolean jj_3R_36() {
     if (jj_3R_14()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_115() {
-    if (jj_3R_23()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_35() {
-    if (jj_3R_6()) return true;
     return false;
   }
 
