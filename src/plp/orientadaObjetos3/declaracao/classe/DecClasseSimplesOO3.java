@@ -134,6 +134,8 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		}
 
 		// elabora constantes de modulos
+		//TODO checar se podemos tirar isso uma vez que as constantes
+		//estão no contexto das defClasses.
 		elaboraListaModulo((AmbienteExecucaoOO3) ambiente, defClass);
 
 		return (AmbienteExecucaoOO3) ambiente;

@@ -1,45 +1,40 @@
 {
  
- 	module ATeste2 {
-		int constanteTeste = 4;
-		
-		
-	},
-	
-	
 	module Teste {
 	
-		int constanteTeste = 2;
-		
-		proc printSoma3(int i, int j, int k) {
-			write(i +j + k)
-		}
+		int constanteTeste = 4;
 		
 	} ,
 	
-	
 	classe Contador  {
-		include  Teste, ATeste2;
+		include Teste;
 		
 		int valor = 0;
  
 		Contador(int i){
 			this.valor := i
-			
 		},
  
 		proc print() {
-			write(this.valor);
-			write(this.constanteTeste)
-			
+			write(this.valor)
 		}
  
-	};
- 
+	},
+	
+	classe ContadorFilho extends Contador {
+		int valorFilho = 1;
+		
+		ContadorFilho(int i){
+			this.valorFilho := i
+		},
+		
+		proc hello() {
+			write("hello")
+ 		}
+ 	};
+ 	
 	{
-		Contador cont := new Contador(1);
-		cont.print();
-		cont.printSoma3(cont.valor,2,10);
+		Contador cont := new ContadorFilho(1);
 		write(cont.constanteTeste)
 		
 	}

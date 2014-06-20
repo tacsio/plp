@@ -111,7 +111,8 @@ public class NewOO3 extends New {
 
 	private void elaboraListaModulo(AmbienteExecucaoOO3 ambiente,
 			DefClasseOO3 defClass, ValorRef vr)
-			throws ModuloNaoDeclaradoException, ObjetoNaoDeclaradoException {
+			throws ModuloNaoDeclaradoException, ObjetoNaoDeclaradoException,
+			ClasseNaoDeclaradaException {
 
 		ListaId included = defClass.getListaInclude();
 		ListaId extended = defClass.getListaExtends();
@@ -134,6 +135,13 @@ public class NewOO3 extends New {
 				elaboraConstantes(ambiente, objeto, id);
 			}
 		}
+
+		// elabora constantes de modulos das SuperClasses de forma recursiva
+		Id nomeSuperClasse = defClass.getNomeSuperClasse();
+		if (nomeSuperClasse != null) {
+			elaboraListaModulo((AmbienteExecucaoOO3) ambiente,
+					(DefClasseOO3) ambiente.getDefClasse(nomeSuperClasse), vr);
+		}
 	}
 
 	private void elaboraConstantes(AmbienteExecucaoOO3 ambiente,
@@ -141,10 +149,10 @@ public class NewOO3 extends New {
 
 		List<Constante> constantes = ambiente.getDefModulo(id)
 				.getDecConstantes().getListaConstantes();
-		
-		for(Constante constante : constantes){
-			if(!objeto.containsKey(constante.getId())){
-				objeto.put(constante.getId(),constante.getValor());
+
+		for (Constante constante : constantes) {
+			if (!objeto.containsKey(constante.getId())) {
+				objeto.put(constante.getId(), constante.getValor());
 			}
 		}
 	}
