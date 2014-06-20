@@ -1,6 +1,5 @@
 package plp.orientadaObjetos3.declaracao.classe;
 
-import java.util.List;
 import java.util.Map;
 
 import plp.expressions2.memory.VariavelJaDeclaradaException;
@@ -103,7 +102,7 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 				throw new ModuloNaoDeclaradoException(id);
 			} else {
 				Map<Id, Constante> constantes = ambiente.getDefModulo(id)
-						.getDecConstantes().getListaConstantes();
+						.getDecConstantes().getMapConstantes();
 				
 				defClass.addConstantes(constantes);
 			}

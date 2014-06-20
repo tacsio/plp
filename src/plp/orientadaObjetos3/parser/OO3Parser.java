@@ -53,7 +53,6 @@ import plp.orientadaObjetos3.memoria.ContextoCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos2.comando.*;
 import plp.orientadaObjetos2.expressao.leftExpression.*;
-import plp.orientadaObjetos2.declaracao.variavel.DecVariavelObjetoOO2;
 import plp.orientadaObjetos3.modulo.ListaId;
 import plp.orientadaObjetos3.modulo.UsaModulo;
 import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
@@ -61,6 +60,8 @@ import plp.orientadaObjetos3.declaracao.constante.*;
 import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.declaracao.ListaDeclaracaoOO3;
 import plp.orientadaObjetos3.comando.ChamadaMetodoOO3;
+import plp.orientadaObjetos3.comando.NewOO3;
+import plp.orientadaObjetos3.declaracao.variavel.DecVariavelObjetoOO3;
 
 /** * Parser para a Linguagem de Programacao Orientada a Objetos 2 */
 public class OO3Parser implements OO3ParserConstants {
@@ -385,7 +386,7 @@ public class OO3Parser implements OO3ParserConstants {
   }
 
 /** * New ::= LeftExpression ":=" "new" Id **/
-  final public NewOO2 PNew() throws ParseException {
+  final public NewOO3 PNew() throws ParseException {
   LeftExpression av;
   Id idClasse;
   ListaExpressao parametros= null;
@@ -418,7 +419,7 @@ public class OO3Parser implements OO3ParserConstants {
                 if (parametros == null){
                         parametros = new ListaExpressao();
                 }
-                {if (true) return new NewOO2(av, idClasse, parametros);}
+                {if (true) return new NewOO3(av, idClasse, parametros);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1250,7 +1251,7 @@ public class OO3Parser implements OO3ParserConstants {
   }
 
 /** * ... Tipo Id ":=" "new" Id **/
-  final public DecVariavelObjetoOO2 PDecVariavelObjeto() throws ParseException {
+  final public DecVariavelObjetoOO3 PDecVariavelObjeto() throws ParseException {
         Id id, idClasse;
         ListaExpressao parametros= null;
         Tipo tipo;
@@ -1286,7 +1287,7 @@ public class OO3Parser implements OO3ParserConstants {
                 if (parametros == null){
                         parametros = new ListaExpressao();
                 }
-                {if (true) return new DecVariavelObjetoOO2(tipo, id, idClasse, parametros);}
+                {if (true) return new DecVariavelObjetoOO3(tipo, id, idClasse, parametros);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1895,16 +1896,6 @@ public class OO3Parser implements OO3ParserConstants {
     try { return !jj_3_60(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(59, xla); }
-  }
-
-  final private boolean jj_3R_115() {
-    if (jj_3R_23()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_35() {
-    if (jj_3R_6()) return true;
-    return false;
   }
 
   final private boolean jj_3R_114() {
@@ -2636,24 +2627,24 @@ public class OO3Parser implements OO3ParserConstants {
     return false;
   }
 
-  final private boolean jj_3R_57() {
-    if (jj_3R_89()) return true;
-    return false;
-  }
-
   final private boolean jj_3_23() {
     if (jj_3R_12()) return true;
     return false;
   }
 
-  final private boolean jj_3R_10() {
-    if (jj_3R_8()) return true;
+  final private boolean jj_3R_57() {
+    if (jj_3R_89()) return true;
     return false;
   }
 
   final private boolean jj_3R_56() {
     if (jj_3R_91()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_10() {
+    if (jj_3R_8()) return true;
     return false;
   }
 
@@ -3490,6 +3481,16 @@ public class OO3Parser implements OO3ParserConstants {
 
   final private boolean jj_3R_36() {
     if (jj_3R_14()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_115() {
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_35() {
+    if (jj_3R_6()) return true;
     return false;
   }
 

@@ -52,7 +52,6 @@ import plp.orientadaObjetos3.memoria.ContextoCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos2.comando.*;
 import plp.orientadaObjetos2.expressao.leftExpression.*;
-import plp.orientadaObjetos2.declaracao.variavel.DecVariavelObjetoOO2;
 import plp.orientadaObjetos3.modulo.ListaId;
 import plp.orientadaObjetos3.modulo.UsaModulo;
 import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
@@ -60,6 +59,8 @@ import plp.orientadaObjetos3.declaracao.constante.*;
 import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.declaracao.ListaDeclaracaoOO3;
 import plp.orientadaObjetos3.comando.ChamadaMetodoOO3;
+import plp.orientadaObjetos3.comando.NewOO3;
+import plp.orientadaObjetos3.declaracao.variavel.DecVariavelObjetoOO3;
 
 public class OO3ParserTokenManager implements OO3ParserConstants
 {

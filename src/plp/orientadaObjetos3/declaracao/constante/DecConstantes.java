@@ -51,12 +51,16 @@ public class DecConstantes {
 		return ambiente;
 	}
 
-	public Map<Id, Constante> getListaConstantes() {
+	public Map<Id, Constante> getMapConstantes() {
 		Map<Id, Constante> mapConstantes = new HashMap<Id, Constante>();
 		for (Constante constante : listaConstantes) {
 			mapConstantes.put(constante.getId(), constante);
 		}
 		return mapConstantes;
+	}
+	
+	public List<Constante> getListaConstantes(){
+		return this.listaConstantes;
 	}
 
 }

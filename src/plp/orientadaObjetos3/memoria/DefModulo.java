@@ -34,6 +34,11 @@ public class DefModulo {
 	
 	public Procedimento getProcedimento(Id id)
 			throws ProcedimentoNaoDeclaradoException{
+		
+		if(decProcedimento == null){
+			throw new ProcedimentoNaoDeclaradoException(id);
+		}
+		
 		return decProcedimento.getProcedimento(id);
 	}
 

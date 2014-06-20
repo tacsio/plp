@@ -1,5 +1,12 @@
 {
  
+ 	module ATeste2 {
+		int constanteTeste = 4;
+		
+		
+	},
+	
+	
 	module Teste {
 	
 		int constanteTeste = 2;
@@ -10,17 +17,15 @@
 		
 	} ,
 	
-	module Teste2 {
-		int constanteTeste = 4;
-	},
 	
 	classe Contador  {
-		include Teste, Teste2;
+		include  Teste, ATeste2;
 		
 		int valor = 0;
  
 		Contador(int i){
 			this.valor := i
+			
 		},
  
 		proc print() {
@@ -34,7 +39,7 @@
 	{
 		Contador cont := new Contador(1);
 		cont.print();
-		cont.printSoma3(cont.valor,1,1);
+		cont.printSoma3(cont.valor,2,10);
 		write(cont.constanteTeste)
 		
 	}
