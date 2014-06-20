@@ -1,5 +1,5 @@
 {
-
+ 
 	module Teste {
 	
 		int constanteTeste = 4;
@@ -14,17 +14,18 @@
 		include Teste;
 		
 		int valor = 0;
-
+ 
 		Contador(int i){
 			this.valor := i
 		},
-
+ 
 		proc print() {
-			write(this.valor)
+			write(this.valor);
+			write(constanteTeste)
 		}
-
+ 
 	};
-
+ 
 	{
 		Contador cont := new Contador(1);
 		cont.print();
@@ -33,5 +34,5 @@
 	}
 	
 	
-
+ 
 }

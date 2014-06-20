@@ -97,12 +97,16 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		for (Id id : included) {
 			if(ambiente.getDefModulo(id) == null){
 				throw new ModuloNaoDeclaradoException(id);
+			} else {
+				ambiente.getDefModulo(id).getDecConstantes().checaTipo(ambiente);
 			}
 		}
 		
 		for (Id id : extended) {
 			if(ambiente.getDefModulo(id)==null){
 				throw new ModuloNaoDeclaradoException(id);
+			} else {
+				ambiente.getDefModulo(id).getDecConstantes().checaTipo(ambiente);
 			}
 		}
 	}
