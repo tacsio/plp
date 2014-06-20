@@ -26,6 +26,8 @@ import plp.orientadaObjetos1.util.Tipo;
 import plp.orientadaObjetos2.comando.ChamadaMetodoOO2;
 import plp.orientadaObjetos2.memoria.DefClasseOO2;
 import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
+import plp.orientadaObjetos3.memoria.AmbienteExecucaoOO3;
+import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos3.memoria.DefClasseOO3;
 import plp.orientadaObjetos3.memoria.DefModulo;
 
@@ -107,7 +109,16 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 				}
 
 			} else if (ambiente instanceof AmbienteExecucaoOO1) {
-				
+				DefModulo modulo = ((AmbienteExecucaoOO3) ambiente)
+						.getDefModulo(id);
+				if (modulo != null) {
+					try {
+						metodo = modulo.getProcedimento(nomeMetodo);
+						return metodo;
+					} catch (ProcedimentoNaoDeclaradoException e) {
+						continue;
+					}
+				}
 			}
 
 		}
@@ -115,7 +126,7 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 		return metodo;
 	}
 
-	public AmbienteExecucaoOO1 executar(AmbienteExecucaoOO1 ambiente)
+	public AmbienteExecucaoOO3 executar(AmbienteExecucaoOO1 ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 			ProcedimentoNaoDeclaradoException,
 			ProcedimentoJaDeclaradoException, ObjetoJaDeclaradoException,
@@ -138,7 +149,7 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 
 		// cria um novo ambiente para a execucao, pois
 		// nao deve levar em conta as variaveis definidas na main
-		AmbienteExecucaoOO1 aux = new ContextoExecucaoOO1(ambiente);
+		AmbienteExecucaoOO3 aux = new ContextoExecucaoOO3((AmbienteExecucaoOO3) ambiente);
 		// a change pois no construtor do ambiente
 
 		// invocado na linha anterior ja eh feitoum mapeamento
@@ -147,7 +158,8 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 		ListaValor valoresDosParametros = parametrosReais.avaliar(ambiente);
 		new ChamadaProcedimento(metodo, parametrosReais, valoresDosParametros)
 				.executar(aux);
-		return ambiente;
+		
+		return (AmbienteExecucaoOO3) ambiente;
 	}
 
 	public boolean checaTipo(AmbienteCompilacaoOO1 ambiente)

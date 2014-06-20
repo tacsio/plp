@@ -56,7 +56,7 @@ public class DecModulo implements Declaracao {
 		((AmbienteCompilacaoOO3) ambiente).mapDefModulo(id, defModulo);
 
 		ambiente.incrementa();
-		
+
 		if (decConstantes != null) {
 			ret = decConstantes.checaTipo(ambiente);
 		} else {
@@ -66,7 +66,7 @@ public class DecModulo implements Declaracao {
 		if (ret && decProcedimento != null) {
 			ret = decProcedimento.checaTipo(ambiente);
 		}
-		
+
 		ambiente.restaura();
 
 		return ret;
@@ -80,6 +80,10 @@ public class DecModulo implements Declaracao {
 
 		DefModulo defModulo = new DefModulo(id, decConstantes, decProcedimento);
 		((AmbienteExecucaoOO3) ambiente).mapDefModulo(id, defModulo);
+
+		if (decConstantes != null) {
+			ambiente = decConstantes.elabora((AmbienteExecucaoOO3) ambiente);
+		}
 		
 		return (AmbienteExecucaoOO3) ambiente;
 	}

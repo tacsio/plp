@@ -2,10 +2,10 @@
 
 	module Teste {
 	
-		int constanteTeste = 2;
+		int constanteTeste = 4;
 		
 		proc printSoma3(int i, int j, int k) {
-			write(i +j + constanteTeste)
+			write(i +j + k)
 		}
 		
 	} ,
@@ -28,7 +28,7 @@
 	{
 		Contador cont := new Contador(1);
 		cont.print();
-		cont.printSoma3(1,1,1)
+		cont.printSoma3(cont.valor,1,1)
 		
 	}
 	
