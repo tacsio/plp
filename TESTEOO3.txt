@@ -2,13 +2,14 @@
  
 	module Teste {
 	
-		int constanteTeste = 4;
+		int constanteTeste = 2;
 		
 	} ,
 	
 	classe Contador  {
 		include Teste;
-		
+
+		int constanteTeste = 13,
 		int valor = 0;
  
 		Contador(int i){
@@ -16,27 +17,17 @@
 		},
  
 		proc print() {
-			write(this.valor)
+			write(this.valor);
+			this.constanteTeste := 9
 		}
  
-	},
-	
-	classe ContadorFilho extends Contador {
-		int valorFilho = 1;
-		
-		ContadorFilho(int i){
-			this.valorFilho := i
-		},
-		
-		proc hello() {
-			write("hello")
- 		}
- 	};
+	};
  	
 	{
-		Contador cont := new ContadorFilho(1);
-		write(cont.constanteTeste)
-		
+		Contador cont := new Contador(1);
+		write(cont.constanteTeste);
+		cont.print();
+		write(cont.constanteTeste)		
 	}
 	
 	
