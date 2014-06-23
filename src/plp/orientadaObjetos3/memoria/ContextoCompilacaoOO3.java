@@ -51,16 +51,7 @@ public class ContextoCompilacaoOO3 extends ContextoCompilacaoOO2 implements
 			tipo = super.get(idArg);
 		} catch (VariavelNaoDeclaradaException e) {
 
-			// TODO: extrair metodo
-			Stack<HashMap<Id, Tipo>> auxStack = new Stack<HashMap<Id, Tipo>>();
-			while (tipo == null && !pilhaConstantes.empty()) {
-				HashMap<Id, Tipo> aux = pilhaConstantes.pop();
-				auxStack.push(aux);
-				tipo = aux.get(idArg);
-			}
-			while (!auxStack.empty()) {
-				pilhaConstantes.push(auxStack.pop());
-			}
+			tipo = buscarPilhaConstantes((Id) idArg);
 			if (tipo == null) {
 				throw new VariavelNaoDeclaradaException(idArg);
 			}
@@ -68,6 +59,22 @@ public class ContextoCompilacaoOO3 extends ContextoCompilacaoOO2 implements
 
 		return tipo;
 
+	}
+	
+	private Tipo buscarPilhaConstantes(Id idArg) {
+		Tipo tipo = null;
+		
+		Stack<HashMap<Id, Tipo>> auxStack = new Stack<HashMap<Id, Tipo>>();
+		while (tipo == null && !pilhaConstantes.empty()) {
+			HashMap<Id, Tipo> aux = pilhaConstantes.pop();
+			auxStack.push(aux);
+			tipo = aux.get(idArg);
+		}
+		while (!auxStack.empty()) {
+			pilhaConstantes.push(auxStack.pop());
+		}
+				
+		return tipo;
 	}
 
 	public void mapConstantes(Id id, Tipo tipo)

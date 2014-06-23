@@ -103,8 +103,10 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 			} else {
 				Map<Id, Constante> constantes = ambiente.getDefModulo(id)
 						.getDecConstantes().getMapConstantes();
-				
+
 				defClass.addConstantes(constantes);
+				ambiente.getDefModulo(id).getDecConstantes()
+						.checaTipo(ambiente);
 			}
 		}
 
@@ -112,7 +114,11 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 			if (ambiente.getDefModulo(id) == null) {
 				throw new ModuloNaoDeclaradoException(id);
 			} else {
-				//FIXME: ajuste constantes de classe
+				Map<Id, Constante> constantes = ambiente.getDefModulo(id)
+						.getDecConstantes().getMapConstantes();
+
+				defClass.addConstantes(constantes);
+				// FIXME: ajuste constantes de classe
 				ambiente.getDefModulo(id).getDecConstantes()
 						.checaTipo(ambiente);
 			}
@@ -134,9 +140,7 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		}
 
 		// elabora constantes de modulos
-		//TODO checar se podemos tirar isso uma vez que as constantes
-		//estão no contexto das defClasses.
-		//elaboraListaModulo((AmbienteExecucaoOO3) ambiente, defClass);
+		elaboraListaModulo((AmbienteExecucaoOO3) ambiente, defClass);
 
 		return (AmbienteExecucaoOO3) ambiente;
 	}

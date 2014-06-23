@@ -1,0 +1,127 @@
+{
+
+	module Teste {
+	
+		int constanteTeste = 2;
+		
+		proc printFromModule(int i){
+			write(constanteTeste+i)
+		}
+		
+	} ,
+	
+	module Teste2 {
+	
+		int constanteTeste2 = 40;
+		
+		proc printFromModule2(int i){
+			write(constanteTeste2+i)
+		}
+		
+	} ,
+	
+	module Teste3 {
+	
+		int constanteTeste3 = 51;
+		
+	} ,
+	
+	classe Contador  {
+		include Teste3;
+
+		int valor = 0;
+ 
+		Contador(int i){
+			this.valor := i
+		},
+ 
+		proc print() {
+			write(this.valor)
+		}
+	},
+	
+	classe Eletrodomestico{
+	
+		include Teste, Teste3;
+		
+		boolean ligado = false,
+		int voltagem = 220;
+		
+		Eletrodomestico(boolean ligado, int voltagem){
+			this.ligado := ligado;
+			this.voltagem := voltagem
+		},			
+		proc ligar(){
+			this.ligado := true
+		},
+		proc desligar(){
+			this.ligado := false
+		},
+		proc imprimeEstado(){
+			write("Ligado: " ++ this.ligado);
+			write("Voltagem: " ++ this.voltagem)
+		}			
+	},
+	classe Tv extends Eletrodomestico{
+		include Teste2;
+		
+		
+		int canal = 3,
+		int volume = 0;
+		
+		
+		Tv(boolean ligado, int voltagem, int canal, int volume){
+			this.ligado := ligado;
+			this.voltagem := voltagem;
+			this.canal := canal;
+			this.volume := volume
+		},
+		proc aumentarVolume(){
+			this.volume := this.volume + 1
+		},
+		proc diminuirVolume(){
+			if(not (this.volume == 0)) then {
+				this.volume := this.volume - 1
+			}
+		},
+		proc imprimeEstadoTv(){
+			write("Ligado: " ++ this.ligado);
+			write("Voltagem: " ++ this.voltagem);
+			write("Canal: " ++ this.canal);
+			write("Volume: " ++ this.volume)
+		}
+	},
+	classe TvLCD extends Tv{
+	
+		boolean fullHD = true;
+		
+		TvLCD(boolean ligado, int voltagem, int canal, int volume, boolean fullHD){
+			this.ligado := ligado;
+			this.voltagem := voltagem;
+			this.canal := canal;
+			this.volume := volume;
+			this.fullHD := fullHD
+		},
+		proc imprimeEstadoTvLCD(){
+			this.imprimeEstadoTv();
+			write("FullHD: " ++ this.fullHD)
+		},
+		
+		proc print(){
+			write(this.constanteTeste)
+		}
+	};
+	{
+		TvLCD tvLCD := new TvLCD(false,110,13,20, true);	
+		tvLCD.imprimeEstado();write("------------------------");		
+		tvLCD.imprimeEstadoTv();write("------------------------");		
+		tvLCD.imprimeEstadoTvLCD();
+		tvLCD.print();write("-------------------");
+		tvLCD.printFromModule(20);write("-------------------");
+		tvLCD.printFromModule2(2);write("-------------------");
+		write(tvLCD.constanteTeste);write("-------------------");
+		write(tvLCD.constanteTeste2);write("-------------------");
+		write(tvLCD.constanteTeste3)
+		
+	}
+}

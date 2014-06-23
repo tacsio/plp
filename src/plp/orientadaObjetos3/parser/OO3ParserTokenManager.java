@@ -60,6 +60,7 @@ import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.declaracao.ListaDeclaracaoOO3;
 import plp.orientadaObjetos3.comando.ChamadaMetodoOO3;
 import plp.orientadaObjetos3.comando.NewOO3;
+import plp.orientadaObjetos3.comando.AtribuicaoOO3;
 import plp.orientadaObjetos3.declaracao.variavel.DecVariavelObjetoOO3;
 
 public class OO3ParserTokenManager implements OO3ParserConstants

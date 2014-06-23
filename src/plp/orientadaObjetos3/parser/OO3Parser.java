@@ -61,6 +61,7 @@ import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.declaracao.ListaDeclaracaoOO3;
 import plp.orientadaObjetos3.comando.ChamadaMetodoOO3;
 import plp.orientadaObjetos3.comando.NewOO3;
+import plp.orientadaObjetos3.comando.AtribuicaoOO3;
 import plp.orientadaObjetos3.declaracao.variavel.DecVariavelObjetoOO3;
 
 /** * Parser para a Linguagem de Programacao Orientada a Objetos 2 */
@@ -424,13 +425,13 @@ public class OO3Parser implements OO3ParserConstants {
   }
 
 /** * Atribuicao ::= LeftExpression ":=" Expressao **/
-  final public AtribuicaoOO2 PAtribuicao() throws ParseException {
+  final public AtribuicaoOO3 PAtribuicao() throws ParseException {
   LeftExpression av;
   Expressao exp;
     av = PLeftExpression();
     jj_consume_token(ATTRIB);
     exp = PExpressao();
-    {if (true) return new AtribuicaoOO2(av, exp);}
+    {if (true) return new AtribuicaoOO3(av, exp);}
     throw new Error("Missing return statement in function");
   }
 

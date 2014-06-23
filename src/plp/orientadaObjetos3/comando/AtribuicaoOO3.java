@@ -12,6 +12,7 @@ import plp.orientadaObjetos1.util.Tipo;
 import plp.orientadaObjetos2.comando.AtribuicaoOO2;
 import plp.orientadaObjetos2.expressao.leftExpression.AcessoAtributoIdOO2;
 import plp.orientadaObjetos2.expressao.leftExpression.AcessoAtributoThisOO2;
+import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.DefClasseOO3;
 
 public class AtribuicaoOO3 extends AtribuicaoOO2 {
@@ -28,7 +29,7 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 		// falso (não pode atribuir)
 		if (retorno) {
 
-			//TODO parametrizar
+			// TODO parametrizar
 			if ((av instanceof AcessoAtributoIdOO2)) {
 
 				Tipo tipoLeftExpression = ((AcessoAtributoId) av).getAv()
@@ -36,37 +37,56 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 				DefClasseOO3 defClasse = (DefClasseOO3) ambiente
 						.getDefClasse(tipoLeftExpression.getTipo());
 
-				Id variavelAtribuicao = av.getId();
-				
-				//antes de checar se é constante, precisamos ver se a classe tem variável 
-				//com mesmo id, pois caso seja poderemos atribuir.
-				try {
-					defClasse.getDecVariavel().getTipo(variavelAtribuicao);
-				} catch (VariavelNaoDeclaradaException vnd) {
-					if (defClasse.getConstante(av.getId()) != null) {
-						retorno = false;
-					}
+
+				// antes de checar se é constante, precisamos ver se a classe
+				// tem variável
+				// com mesmo id, pois caso seja poderemos atribuir.
+				if(buscarConstanteClasses(av.getId(), defClasse, (AmbienteCompilacaoOO3) ambiente)){
+					retorno = false;
 				}
 
 			} else if (av instanceof AcessoAtributoThis) {
-				
-				Tipo tipoLeftExpression = ((AcessoAtributoThisOO2) av).getExpressaoObjeto()
-						.getTipo(ambiente);
+
+				Tipo tipoLeftExpression = ((AcessoAtributoThisOO2) av)
+						.getExpressaoObjeto().getTipo(ambiente);
 				DefClasseOO3 defClasse = (DefClasseOO3) ambiente
 						.getDefClasse(tipoLeftExpression.getTipo());
+				
+				// antes de checar se é constante, precisamos ver se a classe
+				// tem variável
+				// com mesmo id, pois caso seja poderemos atribuir.
+				if(buscarConstanteClasses(av.getId(), defClasse, (AmbienteCompilacaoOO3) ambiente)){
+					retorno = false;
+				}
+			}
 
-				Id variavelAtribuicao = av.getId();
+		}
+
+		return retorno;
+	}
+
+	private boolean buscarConstanteClasses(Id idConstante,
+			DefClasseOO3 defClasse, AmbienteCompilacaoOO3 ambiente) {
+
+		boolean retorno = false;
+
+		Id idClass = defClasse.getIdClasse();
+		try {
+			do {
+				DefClasseOO3 classe = (DefClasseOO3) ambiente.getDefClasse(idClass);
+				idClass = classe.getNomeSuperClasse();
 
 				try {
-					defClasse.getDecVariavel().getTipo(variavelAtribuicao);
+					classe.getDecVariavel().getTipo(idConstante);
+					idClass = null;//forcar saida do loop ja que exite um atributo
 				} catch (VariavelNaoDeclaradaException vnd) {
-					if (defClasse.getConstante(av.getId()) != null) {
-						retorno = false;
+					if (classe.getConstante(idConstante) != null) {
+						retorno = true;
 					}
 				}
 
-			}
-
+			} while (retorno != true || idClass != null);
+		} catch (ClasseNaoDeclaradaException e) {
 		}
 
 		return retorno;
