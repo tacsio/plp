@@ -22,14 +22,18 @@ import plp.orientadaObjetos1.memoria.DefClasse;
 import plp.orientadaObjetos1.memoria.Objeto;
 import plp.orientadaObjetos1.memoria.colecao.ListaValor;
 import plp.orientadaObjetos1.util.Tipo;
+import plp.orientadaObjetos1.util.TipoClasse;
 import plp.orientadaObjetos2.comando.ChamadaMetodoOO2;
 import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.AmbienteExecucaoOO3;
 import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos3.memoria.DefClasseOO3;
 import plp.orientadaObjetos3.memoria.DefModulo;
+import plp.orientadaObjetos3.modulo.ListaId;
 
 public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
+
+	protected boolean staticCall = false;
 
 	public ChamadaMetodoOO3(Expressao expressao, Id nomeMetodo,
 			ListaExpressao parametrosReais) {
@@ -48,9 +52,8 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 		} catch (ProcedimentoNaoDeclaradoException e) {
 			try {
 				// tenta buscar o metodo no modulo;
-				metodo = buscaHierarquiaModuloInclude(ambiente, defClasse,
-						nomeMetodo);
-				
+				metodo = buscaHierarquiaModulo(ambiente, defClasse, nomeMetodo);
+
 				// tenta buscar o metodo na superclasse;
 			} catch (ProcedimentoNaoDeclaradoException e2) {
 				metodo = buscaHierarquiaSuperclasse(ambiente, defClasse,
@@ -86,13 +89,23 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 		return metodo;
 	}
 
-	public Procedimento buscaHierarquiaModuloInclude(Ambiente ambiente,
+	public Procedimento buscaHierarquiaModulo(Ambiente ambiente,
 			DefClasseOO3 defClasse, Id nomeMetodo)
 			throws ProcedimentoNaoDeclaradoException {
 
 		Procedimento metodo = null;
 
-		for (Id id : defClasse.getListaInclude()) {
+		ListaId modules = null;
+
+		if(staticCall){
+			modules = defClasse.getListaExtends();
+		} else {
+			modules = new ListaId();
+			modules.addAll(defClasse.getListaInclude());
+			modules.addAll(defClasse.getListaExtends());
+		}
+		
+		for (Id id : modules) {
 
 			if (ambiente instanceof AmbienteCompilacaoOO3) {
 				DefModulo modulo = ((AmbienteCompilacaoOO3) ambiente)
@@ -120,10 +133,10 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 			}
 		}
 
-		if(metodo == null){
+		if (metodo == null) {
 			throw new ProcedimentoNaoDeclaradoException(nomeMetodo);
 		}
-		
+
 		return metodo;
 	}
 
@@ -134,10 +147,21 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 			ObjetoNaoDeclaradoException, ClasseNaoDeclaradaException,
 			ClasseJaDeclaradaException, EntradaInvalidaException {
 
-		ValorRef vr = (ValorRef) expressao.avaliar(ambiente); // recupera o id
-		// do objeto
-		Objeto objeto = ambiente.getObjeto(vr); // recupera o objeto
-		Id idClasse = objeto.getClasse(); // recupera o tipo do objeto
+		Id idClasse = null;
+		ValorRef vr = null;
+		
+		try {
+			vr = (ValorRef) expressao.avaliar(ambiente); // recupera o id
+			// do objeto
+			Objeto objeto = ambiente.getObjeto(vr); // recupera o objeto
+			idClasse = objeto.getClasse(); // recupera o tipo do objeto
+		
+		} catch (VariavelNaoDeclaradaException e){
+			idClasse = (Id) expressao;
+			Tipo tipoClasse = new TipoClasse(idClasse);
+			staticCall = expressao.equals(tipoClasse.getTipo());
+		}
+		
 		DefClasse defClasse = ambiente
 				.getDefClasse((plp.expressions2.expression.Id) idClasse);
 		// recupera
@@ -150,7 +174,8 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 
 		// cria um novo ambiente para a execucao, pois
 		// nao deve levar em conta as variaveis definidas na main
-		AmbienteExecucaoOO3 aux = new ContextoExecucaoOO3((AmbienteExecucaoOO3) ambiente);
+		AmbienteExecucaoOO3 aux = new ContextoExecucaoOO3(
+				(AmbienteExecucaoOO3) ambiente);
 		// a change pois no construtor do ambiente
 
 		// invocado na linha anterior ja eh feitoum mapeamento
@@ -159,7 +184,7 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 		ListaValor valoresDosParametros = parametrosReais.avaliar(ambiente);
 		new ChamadaProcedimento(metodo, parametrosReais, valoresDosParametros)
 				.executar(aux);
-		
+
 		return (AmbienteExecucaoOO3) ambiente;
 	}
 
@@ -169,7 +194,17 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 
 		boolean resposta;
 
-		Tipo tipoClasse = expressao.getTipo(ambiente);
+		Tipo tipoClasse = null;
+		try {
+			tipoClasse = expressao.getTipo(ambiente);
+		} catch (VariavelNaoDeclaradaException e) {
+			Id idClasse = (Id) expressao;
+			ambiente.getDefClasse(idClasse);// chega se a classe existe
+			tipoClasse = new TipoClasse(idClasse);
+			staticCall = expressao.equals(tipoClasse.getTipo());
+
+		}
+
 		DefClasse defClasse = ambiente.getDefClasse(tipoClasse.getTipo());
 		try {
 			Procedimento metodo = this.getProcedimentoHierarquia(ambiente,
