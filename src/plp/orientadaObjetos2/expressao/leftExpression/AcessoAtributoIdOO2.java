@@ -71,7 +71,11 @@ public class AcessoAtributoIdOO2 extends AcessoAtributoId{
 			AmbienteCompilacaoOO2 ambienteOO2 = (AmbienteCompilacaoOO2) ambiente;
 			Tipo tipoObjetoAcessado = this.getExpressaoObjeto().getTipo(ambienteOO2);
 			DefClasseOO2 defClasse = (DefClasseOO2) ambienteOO2.getDefClasse(tipoObjetoAcessado.getTipo());
-			defClasse = (DefClasseOO2) ambienteOO2.getDefClasse(defClasse.getNomeSuperClasse());
+			if(defClasse.getNomeSuperClasse() != null)
+				defClasse = (DefClasseOO2) ambienteOO2.getDefClasse(defClasse.getNomeSuperClasse());
+			else
+				throw new VariavelNaoDeclaradaException(this.getId());
+			
 			while(tipo == null && defClasse != null){
 				try{
 					tipo = defClasse.getTipoAtributo(getId());

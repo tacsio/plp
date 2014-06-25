@@ -25,6 +25,9 @@ public class DefModulo {
 	}
 
 	public DecConstantes getDecConstantes() {
+		if(decConstantes == null){
+			decConstantes = new DecConstantes();
+		}
 		return decConstantes;
 	}
 

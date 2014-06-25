@@ -100,9 +100,10 @@ public class ChamadaMetodoOO3 extends ChamadaMetodoOO2 {
 		if(staticCall){
 			modules = defClasse.getListaExtends();
 		} else {
-			modules = new ListaId();
-			modules.addAll(defClasse.getListaInclude());
-			modules.addAll(defClasse.getListaExtends());
+			//modules = new ListaId();
+			//modules.addAll(defClasse.getListaInclude());
+			//modules.addAll(defClasse.getListaExtends());
+			modules = defClasse.getListaInclude();
 		}
 		
 		for (Id id : modules) {
