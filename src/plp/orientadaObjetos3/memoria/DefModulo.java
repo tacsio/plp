@@ -3,7 +3,9 @@ package plp.orientadaObjetos3.memoria;
 import plp.orientadaObjetos1.comando.Procedimento;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
+import plp.orientadaObjetos1.excecao.declaracao.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
+import plp.orientadaObjetos3.declaracao.constante.Constante;
 import plp.orientadaObjetos3.declaracao.constante.DecConstantes;
 
 public class DefModulo {
@@ -43,6 +45,16 @@ public class DefModulo {
 		}
 		
 		return decProcedimento.getProcedimento(id);
+	}
+	
+	public Constante getConstante(Id id) 
+			throws VariavelNaoDeclaradaException{
+		
+		if(decConstantes == null){
+			throw new VariavelNaoDeclaradaException(id);
+		}
+		
+		return decConstantes.getConstante(id);
 	}
 
 }

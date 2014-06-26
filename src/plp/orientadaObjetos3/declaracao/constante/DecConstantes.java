@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import plp.orientadaObjetos1.excecao.declaracao.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
@@ -61,6 +62,21 @@ public class DecConstantes {
 	
 	public List<Constante> getListaConstantes(){
 		return this.listaConstantes;
+	}
+	
+	public Constante getConstante(Id id) throws VariavelNaoDeclaradaException{
+		Constante retorno = null;
+		for (Constante constante : listaConstantes) {
+			if(constante.getId().toString().equals(id.toString())){
+				retorno = constante;
+			}
+		}
+		
+		if(retorno != null){
+			return retorno;
+		} else {
+			throw new VariavelNaoDeclaradaException(id);
+		}
 	}
 
 }

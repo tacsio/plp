@@ -1,15 +1,17 @@
 {
- 
 	module Teste {
+	
 		int constanteTeste = 2;
 		
 		proc printFromModule(int i){
-			write(constanteTeste+i)
+			write(i)
 		}
 	} ,
 	
 	classe Contador  {
 		extends Teste;
+		
+		int constanteTeste=13,
 
 		int valor = 0;
  
@@ -25,12 +27,7 @@
  	
 	{
 		Contador cont := new Contador(1);
-		Contador.printFromModule(2);
-		cont.printFromModule(2);
-		write(cont.constanteTeste);
-		write(Contador.constanteTeste)
+		write(Contador.constanteTeste);
+		write(cont.constanteTeste)	
 	}
-	
-	
- 
 }
