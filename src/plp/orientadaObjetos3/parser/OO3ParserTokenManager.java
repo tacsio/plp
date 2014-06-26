@@ -52,6 +52,7 @@ import plp.orientadaObjetos3.memoria.ContextoCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos2.comando.*;
 import plp.orientadaObjetos2.expressao.leftExpression.*;
+import plp.orientadaObjetos3.expressao.leftExpression.*;
 import plp.orientadaObjetos3.modulo.ListaId;
 import plp.orientadaObjetos3.modulo.UsaModulo;
 import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;

@@ -10,7 +10,6 @@ import plp.orientadaObjetos1.expressao.leftExpression.LeftExpression;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import plp.orientadaObjetos1.util.Tipo;
 import plp.orientadaObjetos2.comando.AtribuicaoOO2;
-import plp.orientadaObjetos2.expressao.leftExpression.AcessoAtributoIdOO2;
 import plp.orientadaObjetos2.expressao.leftExpression.AcessoAtributoThisOO2;
 import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.DefClasseOO3;
@@ -30,7 +29,7 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 		if (retorno) {
 
 			// TODO parametrizar
-			if ((av instanceof AcessoAtributoIdOO2)) {
+			if ((av instanceof AcessoAtributoId)) {
 
 				Tipo tipoLeftExpression = ((AcessoAtributoId) av).getAv()
 						.getTipo(ambiente);
@@ -43,6 +42,7 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 				// com mesmo id, pois caso seja poderemos atribuir.
 				if(buscarConstanteClasses(av.getId(), defClasse, (AmbienteCompilacaoOO3) ambiente)){
 					retorno = false;
+					System.out.println("Não é possível modificar o valor da constante: " + av.getId());
 				}
 
 			} else if (av instanceof AcessoAtributoThis) {
@@ -57,6 +57,7 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 				// com mesmo id, pois caso seja poderemos atribuir.
 				if(buscarConstanteClasses(av.getId(), defClasse, (AmbienteCompilacaoOO3) ambiente)){
 					retorno = false;
+					System.out.println("Não é possível modificar o valor da constante: " + av.getId());
 				}
 			}
 

@@ -53,6 +53,7 @@ import plp.orientadaObjetos3.memoria.ContextoCompilacaoOO3;
 import plp.orientadaObjetos3.memoria.ContextoExecucaoOO3;
 import plp.orientadaObjetos2.comando.*;
 import plp.orientadaObjetos2.expressao.leftExpression.*;
+import plp.orientadaObjetos3.expressao.leftExpression.*;
 import plp.orientadaObjetos3.modulo.ListaId;
 import plp.orientadaObjetos3.modulo.UsaModulo;
 import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
@@ -900,7 +901,7 @@ public class OO3Parser implements OO3ParserConstants {
   }
 
 /** * ... "("LeftExpression")".Id | Id.Id **/
-  final public AcessoAtributoIdOO2 PAcessoAtributoId() throws ParseException {
+  final public AcessoAtributoIdOO3 PAcessoAtributoId() throws ParseException {
   LeftExpression av;
   Id id;
     if (jj_2_32(2147483647)) {
@@ -920,7 +921,7 @@ public class OO3Parser implements OO3ParserConstants {
     }
     jj_consume_token(DOT);
     id = PId();
-    {if (true) return new AcessoAtributoIdOO2(av, id);}
+    {if (true) return new AcessoAtributoIdOO3(av, id);}
     throw new Error("Missing return statement in function");
   }
 
@@ -959,7 +960,7 @@ public class OO3Parser implements OO3ParserConstants {
   }
 
 /** * ... "("LeftExpressionChamadora")".Id | Id.Id **/
-  final public AcessoAtributoIdOO2 PAcessoAtributoIdChamador() throws ParseException {
+  final public AcessoAtributoIdOO3 PAcessoAtributoIdChamador() throws ParseException {
   LeftExpression av;
   Id id;
     if (jj_2_39(2147483647)) {
@@ -976,7 +977,7 @@ public class OO3Parser implements OO3ParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    {if (true) return new AcessoAtributoIdOO2(av, id);}
+    {if (true) return new AcessoAtributoIdOO3(av, id);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1899,16 +1900,6 @@ public class OO3Parser implements OO3ParserConstants {
     finally { jj_save(59, xla); }
   }
 
-  final private boolean jj_3R_114() {
-    if (jj_3R_137()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_34() {
-    if (jj_3R_82()) return true;
-    return false;
-  }
-
   final private boolean jj_3_21() {
     if (jj_scan_token(FALSE)) return true;
     return false;
@@ -1924,13 +1915,6 @@ public class OO3Parser implements OO3ParserConstants {
     return false;
   }
 
-  final private boolean jj_3R_85() {
-    if (jj_3R_4()) return true;
-    if (jj_scan_token(SEMICOLON)) return true;
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
   final private boolean jj_3R_5() {
     Token xsp;
     xsp = jj_scanpos;
@@ -1941,6 +1925,13 @@ public class OO3Parser implements OO3ParserConstants {
     if (jj_3R_36()) return true;
     }
     }
+    return false;
+  }
+
+  final private boolean jj_3R_85() {
+    if (jj_3R_4()) return true;
+    if (jj_scan_token(SEMICOLON)) return true;
+    if (jj_3R_9()) return true;
     return false;
   }
 
@@ -2638,14 +2629,14 @@ public class OO3Parser implements OO3ParserConstants {
     return false;
   }
 
-  final private boolean jj_3R_56() {
-    if (jj_3R_91()) return true;
-    if (jj_scan_token(SEMICOLON)) return true;
+  final private boolean jj_3R_10() {
+    if (jj_3R_8()) return true;
     return false;
   }
 
-  final private boolean jj_3R_10() {
-    if (jj_3R_8()) return true;
+  final private boolean jj_3R_56() {
+    if (jj_3R_91()) return true;
+    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
@@ -3492,6 +3483,16 @@ public class OO3Parser implements OO3ParserConstants {
 
   final private boolean jj_3R_35() {
     if (jj_3R_6()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_114() {
+    if (jj_3R_137()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_34() {
+    if (jj_3R_82()) return true;
     return false;
   }
 
