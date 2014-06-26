@@ -1,11 +1,11 @@
 package plp.orientadaObjetos3.modulo;
 
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 
-public class ListaId extends HashSet<Id> {
+public class ListaId extends LinkedHashSet<Id> {
 
 	/**
 	 * 
