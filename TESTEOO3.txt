@@ -10,8 +10,6 @@
 	
 	classe Contador  {
 		extends Teste;
-		
-		int constanteTeste=13,
 
 		int valor = 0;
  
@@ -27,7 +25,6 @@
  	
 	{
 		Contador cont := new Contador(1);
-		write(Contador.constanteTeste);
-		write(cont.constanteTeste)	
+		write(Contador.constanteTeste)	
 	}
 }
