@@ -1,68 +1,145 @@
 {
-    module Mordida {
-        int dano = 800;
 
-        proc morde(Pessoa p) {
-            p.vida := p.vida - dano;
-            write("It's super effective")
+    module Teste {
+
+        string constanteTeste = "constante from module Teste";
+
+        proc printFromModule(){
+            write(constanteTeste)
         }
+
     } ,
 
-    classe Pessoa  {
+    module Teste2 {
 
-        int vida = 1000,
-        string nome = "";
+        string constanteTeste2 = "constante from module Teste2";
 
-        Pessoa(string nome){
-            this.nome := nome
-        },
-
-        proc print() {
-            write("-----------");
-            write("nome: ");write(this.nome);
-            write("vida: ");write(this.vida);
-            write("-----------")
+        proc printFromModule2(){
+            write(constanteTeste2)
         }
 
+    } ,
+
+    module Teste3 {
+        string constanteTeste3 = "constante from module Teste3";
+    } ,
+
+    classe Eletrodomestico{
+
+        include Teste3, Teste;
+
+        boolean ligado = false,
+        int voltagem = 220;
+
+        Eletrodomestico(boolean ligado, int voltagem){
+            this.ligado := ligado;
+            this.voltagem := voltagem
+        },          
+        proc ligar(){
+            this.ligado := true
+        },
+        proc desligar(){
+            this.ligado := false
+        },
+        proc imprimeEstado(){
+            write("Ligado: " ++ this.ligado);
+            write("Voltagem: " ++ this.voltagem)
+        }           
     },
+    classe Tv extends Eletrodomestico{
+        include Teste2;
 
-    classe Atacante extends Pessoa {
-        include Mordida;
+		string constanteTeste = "VAR",
+		
+        int canal = 3,
+        int volume = 0;
 
-        int numeroGols = 0;
 
-        Atacante(string nome, int numeroGols){
-            this.nome := nome;
-            this.numeroGols := numeroGols
+        Tv(boolean ligado, int voltagem, int canal, int volume){
+            this.ligado := ligado;
+            this.voltagem := voltagem;
+            this.canal := canal;
+            this.volume := volume
         },
-
-        proc marcar(){
-            write(this.nome);write("Marcou um gol");
-            this.numeroGols := this.numeroGols + 1
+        proc aumentarVolume(){
+            this.volume := this.volume + 1
         },
-
-        proc print() {
-            write("-----------");
-            write("nome: ");write(this.nome);
-            write("vida: ");write(this.vida);
-            write("numero de gols: ");write(this.numeroGols);
-            write("-----------")
+        proc diminuirVolume(){
+            if(not (this.volume == 0)) then {
+                this.volume := this.volume - 1
+            }
+        },
+        proc imprimeEstadoTv(){
+            write("Ligado: " ++ this.ligado);
+            write("Voltagem: " ++ this.voltagem);
+            write("Canal: " ++ this.canal);
+            write("Volume: " ++ this.volume)
         }
+    },
+    classe TvLCD extends Tv{
+		
+		
+        boolean fullHD = true;
 
+        TvLCD(boolean ligado, int voltagem, int canal, int volume, boolean fullHD){
+            this.ligado := ligado;
+            this.voltagem := voltagem;
+            this.canal := canal;
+            this.volume := volume;
+            this.fullHD := fullHD
+        },
+        proc imprimeEstadoTvLCD(){
+            this.imprimeEstadoTv();
+            write("FullHD: " ++ this.fullHD)
+        },
+
+        proc print(){
+            write(this.constanteTeste);
+            write(this.constanteTeste2);
+            write(this.constanteTeste3)
+        }
     };
-
     {
-        Pessoa suarez := new Atacante("Luis Suárez", 3),
-        Pessoa chielini := new Pessoa("Giorgio Chiellini");
 
-        chielini.print();
-        suarez.print();
+        TvLCD tvLCD := new TvLCD(false,110,13,20, true);
 
-        write("A Wild Suárez Appears!");
-        write("Suárez used Bite!");
-        suarez.morde(chielini);
-        chielini.print()
+        write("");
+        write("imprime estado eletrodomestico");    
+        tvLCD.imprimeEstado();
+        write("------------------------");
+        write("------------------------");
 
+        write("imprime estado TV");     
+        tvLCD.imprimeEstadoTv();
+        write("------------------------");
+        write("------------------------");
+
+        write("imprime estado TV LCD");
+        tvLCD.imprimeEstadoTvLCD()
+        ;write("------------------------");
+        write("------------------------");
+
+        write("executa metodo modulo 1");
+        tvLCD.printFromModule();
+        write("-------------------");
+        write("------------------------");
+
+        write("executa metodo modulo 2");
+        tvLCD.printFromModule2();
+        write("-------------------");
+        write("------------------------");
+
+		write("imprime acesso constantes modulos this via metodo print");
+        tvLCD.print();
+        write("-------------------");
+        write("-------------------");
+
+        write("acesso atributos dos modulos via instancia da classe");
+        write(tvLCD.constanteTeste);
+        write(tvLCD.constanteTeste2);
+        write(tvLCD.constanteTeste3);
+        write("-------------------");
+        write("-------------------")
 
     }
 }

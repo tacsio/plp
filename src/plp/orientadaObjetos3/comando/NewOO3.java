@@ -44,14 +44,17 @@ public class NewOO3 extends New {
 	}
 
 	private void extendsClasse(AmbienteExecucaoOO2 ambiente,
-			DefClasseOO3 classe, Objeto objeto)
+			DefClasseOO3 classe, ValorRef vr)
 			throws ClasseNaoDeclaradaException, VariavelNaoDeclaradaException,
 			VariavelJaDeclaradaException, ObjetoNaoDeclaradoException,
 			ClasseJaDeclaradaException, ObjetoJaDeclaradoException {
+		
+		Objeto objeto = ambiente.getObjeto(vr);
+		
 		if (classe.getNomeSuperClasse() != null) {
 			DefClasseOO3 classeMae = (DefClasseOO3) ambiente
 					.getDefClasse(classe.getNomeSuperClasse());
-			this.extendsClasse(ambiente, classeMae, objeto);
+			this.extendsClasse(ambiente, classeMae, vr);
 		}
 
 		DecVariavel decVariavel = classe.getDecVariavel();
@@ -85,16 +88,16 @@ public class NewOO3 extends New {
 		// Recupera o valor referencia
 		ValorRef vr = (ValorRef) getAv().avaliar(ambiente);
 
-		// elabora constantes dos modulos
-		elaboraListaModulo((AmbienteExecucaoOO3) ambiente, defClasse, vr);
-
 		// Extends classe mae
 		if (defClasse.getNomeSuperClasse() != null) {
 			DefClasseOO3 classeMae = (DefClasseOO3) ambiente
 					.getDefClasse(defClasse.getNomeSuperClasse());
 
-			this.extendsClasse(ambiente, classeMae, ambiente.getObjeto(vr));
+			this.extendsClasse(ambiente, classeMae, vr);
 		}
+
+		// elabora constantes dos modulos
+		elaboraListaModulo((AmbienteExecucaoOO3) ambiente, defClasse, vr);
 
 		Procedimento metodo = defClasse.getConstrutor().getProcedimento();
 		AmbienteExecucaoOO3 aux = new ContextoExecucaoOO3(
