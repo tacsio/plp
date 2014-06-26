@@ -5,7 +5,6 @@ import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ObjetoNaoDeclaradoException;
-import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.expressao.leftExpression.LeftExpression;
 import plp.orientadaObjetos1.expressao.valor.Valor;
@@ -102,11 +101,11 @@ public class AcessoAtributoIdOO3 extends AcessoAtributoIdOO2{
 		Constante constante = null;
 
 		try {
-			// tenta buscar o metodo no modulo;
+			// tenta buscar a constante no modulo;
 			constante = buscaHierarquiaModulo(ambiente, defClasse, nomeConstante);
 
-			// tenta buscar o metodo na superclasse;
-		} catch (ProcedimentoNaoDeclaradoException e2) {
+			// tenta buscar a constante na superclasse;
+		} catch (VariavelNaoDeclaradaException e2) {
 			constante = buscaHierarquiaSuperclasse(ambiente, defClasse,
 					nomeConstante);
 		}
@@ -142,7 +141,7 @@ public class AcessoAtributoIdOO3 extends AcessoAtributoIdOO2{
 
 	public Constante buscaHierarquiaModulo(Ambiente ambiente,
 			DefClasseOO3 defClasse, Id nomeConstante)
-			throws ProcedimentoNaoDeclaradoException {
+			throws VariavelNaoDeclaradaException {
 
 		Constante constante = null;
 
