@@ -6,14 +6,13 @@ import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ObjetoNaoDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
-import plp.orientadaObjetos1.expressao.leftExpression.AcessoAtributoId;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.expressao.leftExpression.LeftExpression;
 import plp.orientadaObjetos1.expressao.valor.Valor;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 import plp.orientadaObjetos1.util.Tipo;
-import plp.orientadaObjetos2.memoria.AmbienteCompilacaoOO2;
+import plp.orientadaObjetos2.expressao.leftExpression.AcessoAtributoIdOO2;
 import plp.orientadaObjetos2.memoria.DefClasseOO2;
 import plp.orientadaObjetos3.declaracao.constante.Constante;
 import plp.orientadaObjetos3.memoria.AmbienteCompilacaoOO3;
@@ -22,7 +21,7 @@ import plp.orientadaObjetos3.memoria.DefClasseOO3;
 import plp.orientadaObjetos3.memoria.DefModulo;
 import plp.orientadaObjetos3.modulo.ListaId;
 
-public class AcessoAtributoIdOO3 extends AcessoAtributoId{
+public class AcessoAtributoIdOO3 extends AcessoAtributoIdOO2{
 	
 	protected boolean staticCall = false;
 
@@ -96,38 +95,6 @@ public class AcessoAtributoIdOO3 extends AcessoAtributoId{
         return resposta;
 	}
 	
-	@Override
-	public Tipo getTipo(AmbienteCompilacaoOO1 ambiente)
-			throws VariavelNaoDeclaradaException, ClasseNaoDeclaradaException {
-		Tipo tipo = null;
-		try{
-			tipo = super.getTipo(ambiente);
-		} catch(VariavelNaoDeclaradaException vnde){
-			AmbienteCompilacaoOO2 ambienteOO2 = (AmbienteCompilacaoOO2) ambiente;
-			Tipo tipoObjetoAcessado = this.getExpressaoObjeto().getTipo(ambienteOO2);
-			DefClasseOO2 defClasse = (DefClasseOO2) ambienteOO2.getDefClasse(tipoObjetoAcessado.getTipo());
-			if(defClasse.getNomeSuperClasse() != null)
-				defClasse = (DefClasseOO2) ambienteOO2.getDefClasse(defClasse.getNomeSuperClasse());
-			else
-				throw new VariavelNaoDeclaradaException(this.getId());
-			
-			while(tipo == null && defClasse != null){
-				try{
-					tipo = defClasse.getTipoAtributo(getId());
-				} catch(VariavelNaoDeclaradaException e){
-					// Vazio.
-				}
-				Id nomeSuperClasse = defClasse.getNomeSuperClasse();
-				if(nomeSuperClasse != null){
-					defClasse = (DefClasseOO2) ambienteOO2.getDefClasse(nomeSuperClasse);
-				} else {
-					defClasse = null;
-				}
-			}
-		}
-		return tipo;
-	
-	}
 	
 	private Constante getConstanteHierarquia(Ambiente ambiente,
 			DefClasseOO3 defClasse, Id nomeConstante)
