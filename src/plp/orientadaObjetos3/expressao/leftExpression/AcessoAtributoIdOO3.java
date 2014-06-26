@@ -26,7 +26,6 @@ public class AcessoAtributoIdOO3 extends AcessoAtributoIdOO2{
 
 	public AcessoAtributoIdOO3(LeftExpression av, Id id) {
 		super(av, id);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected boolean checaTipoClasseMae (AmbienteCompilacaoOO1 ambiente, Id idClasseMae) throws ClasseNaoDeclaradaException {
@@ -86,8 +85,6 @@ public class AcessoAtributoIdOO3 extends AcessoAtributoIdOO2{
     				}
     				
     			} catch (VariavelNaoDeclaradaException vnd){
-    				//TODO avaliar se é melhor retornar false para dar Erro de tipo ou retornar VariavelNaoDeclarada
-    				// resposta = false;
     				throw new VariavelNaoDeclaradaException(this.getId());
     			}
             }

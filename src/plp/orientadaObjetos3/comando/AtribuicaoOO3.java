@@ -28,7 +28,6 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 		// falso (não pode atribuir)
 		if (retorno) {
 
-			// TODO parametrizar
 			if ((av instanceof AcessoAtributoId)) {
 
 				Tipo tipoLeftExpression = ((AcessoAtributoId) av).getAv()
@@ -42,6 +41,7 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 				// com mesmo id, pois caso seja poderemos atribuir.
 				if(buscarConstanteClasses(av.getId(), defClasse, (AmbienteCompilacaoOO3) ambiente)){
 					retorno = false;
+					System.out.println();
 					System.out.println("Não é possível modificar o valor da constante: " + av.getId());
 				}
 
@@ -57,6 +57,7 @@ public class AtribuicaoOO3 extends AtribuicaoOO2 {
 				// com mesmo id, pois caso seja poderemos atribuir.
 				if(buscarConstanteClasses(av.getId(), defClasse, (AmbienteCompilacaoOO3) ambiente)){
 					retorno = false;
+					System.out.println();
 					System.out.println("Não é possível modificar o valor da constante: " + av.getId());
 				}
 			}

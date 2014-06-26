@@ -1,0 +1,68 @@
+{
+    module Mordida {
+        int dano = 800;
+
+        proc morde(Pessoa p) {
+            p.vida := p.vida - dano;
+            write("It's super effective")
+        }
+    } ,
+
+    classe Pessoa  {
+
+        int vida = 1000,
+        string nome = "";
+
+        Pessoa(string nome){
+            this.nome := nome
+        },
+
+        proc print() {
+            write("-----------");
+            write("nome: ");write(this.nome);
+            write("vida: ");write(this.vida);
+            write("-----------")
+        }
+
+    },
+
+    classe Atacante extends Pessoa {
+        include Mordida;
+
+        int numeroGols = 0;
+
+        Atacante(string nome, int numeroGols){
+            this.nome := nome;
+            this.numeroGols := numeroGols
+        },
+
+        proc marcar(){
+            write(this.nome);write("Marcou um gol");
+            this.numeroGols := this.numeroGols + 1
+        },
+
+        proc print() {
+            write("-----------");
+            write("nome: ");write(this.nome);
+            write("vida: ");write(this.vida);
+            write("numero de gols: ");write(this.numeroGols);
+            write("-----------")
+        }
+
+    };
+
+    {
+        Pessoa suarez := new Atacante("Luis Suárez", 3),
+        Pessoa chielini := new Pessoa("Giorgio Chiellini");
+
+        chielini.print();
+        suarez.print();
+
+        write("A Wild Suárez Appears!");
+        write("Suárez used Bite!");
+        suarez.morde(chielini);
+        chielini.print()
+
+
+    }
+}

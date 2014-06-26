@@ -11,6 +11,7 @@ import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
+import plp.orientadaObjetos1.memoria.DefClasse;
 import plp.orientadaObjetos1.util.TipoClasse;
 import plp.orientadaObjetos2.declaracao.ConstrutorNaoDeclaradoException;
 import plp.orientadaObjetos2.declaracao.DecConstrutor;
@@ -118,7 +119,6 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 						.getDecConstantes().getMapConstantes();
 
 				defClass.addConstantes(constantes);
-				// FIXME: ajuste constantes de classe
 				ambiente.getDefModulo(id).getDecConstantes()
 						.checaTipo(ambiente);
 			}
@@ -168,6 +168,13 @@ public class DecClasseSimplesOO3 extends DecClasseSimplesOO2 {
 		}
 	}
 
+	
+	public DefClasse getDefClasse(){
+		DefClasseOO3 defClass = new DefClasseOO3(nomeClasse, nomeSuperClasse,
+				atributos, construtor, metodos, listaInclude, listaExtends);
+		
+		return defClass;
+	}
 	public String toString() {
 		StringBuffer retorno = new StringBuffer();
 		retorno.append(this.nomeClasse);

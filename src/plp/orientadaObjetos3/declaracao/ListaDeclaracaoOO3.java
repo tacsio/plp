@@ -14,8 +14,8 @@ import plp.orientadaObjetos1.excecao.declaracao.ObjetoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ObjetoNaoDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
+import plp.orientadaObjetos1.memoria.DefClasse;
 import plp.orientadaObjetos2.declaracao.ConstrutorNaoDeclaradoException;
-import plp.orientadaObjetos2.declaracao.classe.DecClasseSimplesOO2;
 import plp.orientadaObjetos3.declaracao.classe.DecClasseSimplesOO3;
 import plp.orientadaObjetos3.declaracao.modulo.DecModulo;
 import plp.orientadaObjetos3.excecao.declaracao.ModuloJaDeclaradoException;
@@ -56,6 +56,9 @@ public class ListaDeclaracaoOO3 extends Lista<Declaracao> {
 			ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException,
 			ModuloJaDeclaradoException, ClasseNaoDeclaradaException {
 
+		//armazena definicoes das classes antes de checar e um tipo
+		storeDefClasses(ambiente);
+		
 		boolean ret = false;
 		Declaracao declaracao = getHead();
 
@@ -74,6 +77,22 @@ public class ListaDeclaracaoOO3 extends Lista<Declaracao> {
 
 		return ret;
 
+	}
+	
+	private void storeDefClasses(AmbienteCompilacaoOO3 ambiente){
+		Declaracao declaracao = getHead();
+
+		if (declaracao instanceof DecClasse) {
+			DecClasseSimplesOO3 classe = (DecClasseSimplesOO3) declaracao;
+			DefClasse def = classe.getDefClasse();
+			ambiente.mapDefClassTemporario(def.getIdClasse(), def);
+		}
+
+		// passo recursivo
+		if (length() > 1) {
+			((ListaDeclaracaoOO3) getTail()).storeDefClasses(ambiente);
+		}
+		
 	}
 
 	public AmbienteExecucaoOO3 elabora(AmbienteExecucaoOO3 ambiente)

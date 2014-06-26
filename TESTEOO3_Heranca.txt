@@ -2,9 +2,9 @@
 
 	module Teste {
 	
-		int constanteTeste = 2;
+		int constanteTeste = "constante from module Teste";
 		
-		proc printFromModule(int i){
+		proc printFromModule(){
 			write(constanteTeste+i)
 		}
 		
@@ -12,33 +12,17 @@
 	
 	module Teste2 {
 	
-		int constanteTeste2 = 40;
+		int constanteTeste2 = "constante from module Teste2";
 		
-		proc printFromModule2(int i){
-			write(constanteTeste2+i)
+		proc printFromModule2(){
+			write(constanteTeste2)
 		}
 		
 	} ,
 	
 	module Teste3 {
-	
-		int constanteTeste3 = 51;
-		
+		string constanteTeste3 = "constante from module Teste3";
 	} ,
-	
-	classe Contador  {
-		include Teste3;
-
-		int valor = 0;
- 
-		Contador(int i){
-			this.valor := i
-		},
- 
-		proc print() {
-			write(this.valor)
-		}
-	},
 	
 	classe Eletrodomestico{
 	
@@ -117,8 +101,8 @@
 		tvLCD.imprimeEstadoTv();write("------------------------");		
 		tvLCD.imprimeEstadoTvLCD();
 		tvLCD.print();write("-------------------");
-		tvLCD.printFromModule(20);write("-------------------");
-		tvLCD.printFromModule2(2);write("-------------------");
+		tvLCD.printFromModule();write("-------------------");
+		tvLCD.printFromModule2();write("-------------------");
 		write(tvLCD.constanteTeste);write("-------------------");
 		write(tvLCD.constanteTeste2);write("-------------------");
 		write(tvLCD.constanteTeste3)

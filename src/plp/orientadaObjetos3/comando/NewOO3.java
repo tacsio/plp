@@ -131,7 +131,6 @@ public class NewOO3 extends New {
 			if (ambiente.getDefModulo(id) == null) {
 				throw new ModuloNaoDeclaradoException(id);
 			} else {
-				// FIXME: verifar
 				elaboraConstantes(ambiente, objeto, id);
 			}
 		}
