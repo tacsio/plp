@@ -2,17 +2,17 @@
 
 	module Teste {
 	
-		int constanteTeste = "constante from module Teste";
+		string constanteTeste = "constante from module Teste";
 		
 		proc printFromModule(){
-			write(constanteTeste+i)
+			write(constanteTeste)
 		}
 		
 	} ,
 	
 	module Teste2 {
 	
-		int constanteTeste2 = "constante from module Teste2";
+		string constanteTeste2 = "constante from module Teste2";
 		
 		proc printFromModule2(){
 			write(constanteTeste2)
